@@ -1,23 +1,34 @@
 package com.example.tree;
 
+import java.util.Arrays;
+
 public class MInHeap {
 
+	
 	int capacity = 10;
-	int size = 0;
-	int[] array = new int[size];
+	int size;
+	int[] array = new int[capacity];
 	
 	
-	public int getLeftChildIndex(int index){return (2 * index + 1);}
-	public int getRightChildIndex(int index){return (2 * index + 2);}
-	public int getParentIndex(int index){return ((index-1) / 2);}
+	public int getParentIndex(int index){return (index - 2) / 2;}
+	public int getLeftChildIndex(int index){return (index * 2) + 1;}
+	public int getRightChildIndex(int index){return (index * 2) + 2;}
 	
-	public Boolean hasParent(int index){return 0 <= getParentIndex(index);};
-	public Boolean hasLeftChild(int index){return size >= getLeftChildIndex(index);};
-	public Boolean hasRightChild(int index){return size >= getRightChildIndex(index);};
-
-	public int getParent(int index) {return array[getParentIndex(index)];}
-	public int getLeftChild(int index) {return array[getLeftChildIndex(index)];}
-	public int getRightChild(int index) {return array[getRightChildIndex(index)];}
+	public Boolean hasParent(int index){return getParentIndex(index) >=0;}
+	public Boolean hasLeftChild(int index){return getLeftChildIndex(index) < size;}
+	public Boolean hasRightChild(int index){return getRightChildIndex(index) < size;}
+	
+	public int parent(int index){return array[getParentIndex(index)];}
+	public int leftChild(int index){return array[getLeftChildIndex(index)];}
+	public int rightChild(int index){return array[getRightChildIndex(index)];}
+	
+	
+	public void ensureCapacity(){
+		if(size == capacity){
+			Arrays.fill(this.array, capacity * 2);
+			capacity = capacity * 2;
+		}
+	}
 	
 	public void swap(int parent, int i) {
 
@@ -28,50 +39,53 @@ public class MInHeap {
 	
 	
 	public void insert(int value){
-		if(size == capacity)
-			return;
-		else{
-			array[size] = value;
-			size++;
-			heapyfyUp(size - 1);
-		}
+		
+		array[size] = value;
+		size++;
+		heapifyUp();
+		
+	}
+	public void poll(){
+		if(size == 0)
+			throw new IllegalArgumentException();
+		
+		array[0] = array[size - 1];
+		size--;
+		heapifyDown();
 	}
 	
-	public void pop(){
-		
-		//replace 0th element with last and heapify down
-		if(size == 0)
-			return;
-		else{
-			array[0] = array[size - 1];
-			size--;
-			heapifyDown();
-		}
-	}
+	
 	public void heapifyDown() {
 		
 		int index = 0;
 		
+		int smallChildIndex = getLeftChildIndex(index);
 		
 		while(hasLeftChild(index)){
 			
-			int smallIndex = getLeftChildIndex(index);
-			if(hasRightChild(index) && getRightChild(index) < getLeftChild(index)){
-				smallIndex = getRightChildIndex(index);
+			if(hasRightChild(index) && rightChild(index) < leftChild(index)){
+				smallChildIndex = getRightChildIndex(index);
 			}
 			
-			//replace small index
+			if(array[index] < array[smallChildIndex])
+				break;
+			else
+				swap(index,smallChildIndex);
 			
-			if()
+			index = smallChildIndex;
+			
 		}
 		
 	}
-	public void heapyfyUp(int index) {
-
-		while(hasParent(index) && getParent(index) < array[index]){
+	public void heapifyUp() {
+		
+		int index = size - 1;
+		
+		while(hasParent(index) && parent(index) > array[index]){
 			swap(getParentIndex(index),index);
 			index = getParentIndex(index);
 		}
+		
 	}
 	
 	public static void main(String[] args) {

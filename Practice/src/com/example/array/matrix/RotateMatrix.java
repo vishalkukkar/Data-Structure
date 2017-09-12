@@ -16,15 +16,14 @@ public class RotateMatrix {
 		
 		
 		
-		System.out.println(Arrays.deepToString(array));
-		rotateMatrix(array);
+		System.out.println(Arrays.deepToString(array1));
+		rotateMatrix(array1);
 
 	}
 
 	private static void rotateMatrix(int[][] a) {
 
 		int len = a.length - 1;
-		System.out.println(len);
 		for (int i = 0; i < a.length / 2; i++) {
 			for (int j = i; j < len - i; j++) {
 

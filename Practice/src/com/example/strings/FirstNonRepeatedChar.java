@@ -38,7 +38,6 @@ public class FirstNonRepeatedChar {
 		    it.remove();
 		 }
 		
-		map.entrySet().forEach(System.out::println);
 	}
 
 }
