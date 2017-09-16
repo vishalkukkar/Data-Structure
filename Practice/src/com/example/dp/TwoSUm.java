@@ -22,7 +22,7 @@ public class TwoSUm {
 
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
 
-		int[] array = {2,5,3,4,6};
+		int[] array = {2,5,2,5,2,5,2,2,2,2,5,5,5,5};
 		ObjectMapper m = new ObjectMapper();
 		System.out.println(m.writeValueAsString(twoSumMap(array, 7)));
 	}

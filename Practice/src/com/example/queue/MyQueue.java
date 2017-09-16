@@ -2,13 +2,13 @@ package com.example.queue;
 
 import java.util.Arrays;
 
-public class Queue {
+public class MyQueue {
 
 	String[] queueArray;
 	int front, rear, numberOfItems = 0;
 	int sizeOfQueue = 0;
 
-	Queue(int size) {
+	MyQueue(int size) {
 		sizeOfQueue = size;
 		queueArray = new String[size];
 		Arrays.fill(queueArray, "-1");
@@ -23,7 +23,7 @@ public class Queue {
 			numberOfItems++;
 			displayQueue();
 		} else {
-			System.out.println("Queue is already full");
+			System.out.println("MyQueue is already full");
 		}
 
 	}
@@ -35,7 +35,7 @@ public class Queue {
 			numberOfItems--;
 			displayQueue();
 		} else {
-			System.out.println("Queue is Empty");
+			System.out.println("MyQueue is Empty");
 		}
 
 	}
@@ -77,7 +77,7 @@ public class Queue {
 
 	public static void main(String[] args) {
 
-		Queue queue = new Queue(5);
+		MyQueue queue = new MyQueue(5);
 		queue.priorityInsert("10");
 		queue.priorityInsert("20");
 	//	queue.remove();
