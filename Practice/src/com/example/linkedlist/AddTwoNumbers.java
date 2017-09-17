@@ -4,13 +4,11 @@ public class AddTwoNumbers {
 
 	public static void main(String[] args) {
 
-		ListNode head = new ListNode(5);
-	
+		ListNode head = new ListNode(7);
 
-		ListNode head2 = new ListNode(5);
-
-
-		ListNode res = addTwoNumbers(head, head2);
+		ListNode head2 = new ListNode(8);
+		
+		ListNode res = addTwoNumbers(head2, head);
 		System.out.println("Result");
 		while (res != null) {
 			System.out.println(res.val);
@@ -20,78 +18,50 @@ public class AddTwoNumbers {
 
 	private static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
-		int len1 = getLength(l1);
-		int len2 = getLength(l2);
-
-		if (len1 > len2) {
-			int diff = len1 - len2;
-			while (diff != 0) {
-				l1 = l1.next;
-				diff--;
-			}
-		} else if (len2 > len1) {
-			int diff = len2 - len1;
-			while (diff != 0) {
-				l2 = l2.next;
-				diff--;
-			}
-		}
-
-		ListNode t = null;
-		ListNode prev = null;
-		ListNode add = null;
-
+		ListNode result = new ListNode(0);
+		int sum = 0;
 		int carry = 0;
-		while (l1 != null) {
-			int addition = l1.val + l2.val + carry;
-			if (addition > 9) {
-				if (addition % 10 > 0) {
-					carry = addition % 10;
-					addition = addition / 10;
-				} else if (addition % 10 == 0) {
-					carry  = addition / 10;
-					addition = 0;
-				} else {
+		ListNode temp = result;
+		while (l1 != null && l2 != null) {
 
-					addition = addition / 10;
-				}
-			}
+			sum = l1.val + l2.val + carry;
 
-			System.out.println(addition);
+			temp.next = new ListNode(sum % 10);
+			carry = sum / 10;
+			temp = temp.next;
+
+			System.out.println(sum);
 
 			l1 = l1.next;
 			l2 = l2.next;
-			add = new ListNode(addition);
-
-			if (t == null) {
-				t = add;
-			} else {
-				prev.next = add;
-			}
-
-			prev = add;
-			add = add.next;
 
 		}
 
-		System.out.println("c "+carry);
-		if (carry > 0 ){
-			add = new ListNode(carry);
-		}
-
-		return t;
-
-	}
-
-	private static int getLength(ListNode head) {
-		ListNode temp = head;
-
-		int count = 0;
-		while (temp != null) {
+		while(l1 != null){
+			int val = l1.val + carry;
+			temp.next = new ListNode(val % 10);
+			carry = val / 10;
+			System.out.println(sum+" sum "+"CARRY "+carry);
+			l1 = l1.next;
 			temp = temp.next;
-			count++;
 		}
-		return count;
+		
+		while(l2 != null){
+			int val = l2.val + carry;
+			temp.next = new ListNode(val % 10);
+			carry = val / 10;
+			System.out.println(sum+" sum "+"CARRY "+carry);
+			l2 = l2.next;
+			temp = temp.next;
+		}
+		
+		
+		if(carry > 0)
+			temp.next = new ListNode(carry);
+		
+		
+		return result.next;
+
 	}
 
 }

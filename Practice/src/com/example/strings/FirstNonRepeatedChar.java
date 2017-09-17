@@ -9,7 +9,7 @@ public class FirstNonRepeatedChar {
 	public static void main(String[] args) {
 		String string = "abcefabthce";
 
-		//Map<Character, Integer> map = new HashMap<Character, Integer>();
+		//Map<Character, Integer> children = new HashMap<Character, Integer>();
 		LinkedHashMap<Character, Integer> map = new LinkedHashMap<Character, Integer>();
 
 		for (int i = 0; i < string.length(); i++) {
@@ -22,10 +22,10 @@ public class FirstNonRepeatedChar {
 		
 		
 		Integer min = Integer.MIN_VALUE;
-//		for(Map.Entry<Character, Integer> m:map.entrySet()){
+//		for(Map.Entry<Character, Integer> m:children.entrySet()){
 //		
 //			if(m.getKey() == 'a')
-//				map.re
+//				children.re
 //		
 //		}
 		

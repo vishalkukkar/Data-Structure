@@ -12,13 +12,13 @@ public class CRUD {
 		head.next.next.next.next = new ListNode(5);
 		head.next.next.next.next.next = new ListNode(6);
 
-		// System.out.println(isLoop(head));
-		// ListNode n = deleteNode(4, head);
+		// System.out.println(isLoop(top));
+		// ListNode n = deleteNode(4, top);
 
 		// ListNode node = new ListNode(10);
 		// addNode(node, 3);
 
-		// System.out.println(isLoop(head));
+		// System.out.println(isLoop(top));
 
 		ListNode t = reverseLinkedList();
 		System.out.println("result");
@@ -29,8 +29,8 @@ public class CRUD {
 		}
 
 		/*
-		 * while (head != null) { System.out.println(head.val); head =
-		 * head.next; }
+		 * while (top != null) { System.out.println(top.val); top =
+		 * top.next; }
 		 */
 	}
 
@@ -62,7 +62,7 @@ public class CRUD {
 		if (head == null)
 			return null;
 
-		// ListNode prev = head;
+		// ListNode prev = top;
 		ListNode curr = head;
 
 		int count = 1;
