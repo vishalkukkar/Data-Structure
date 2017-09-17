@@ -35,7 +35,7 @@ public class TestRunner {
 		head.next.next = new ListNode(3);
 		head.next.next.next = new ListNode(4);
 
-		// create temp list
+		// create map list
 		ListNode temp = head;
 		List<Integer> list = new ArrayList<Integer>();
 		int count = 0;
