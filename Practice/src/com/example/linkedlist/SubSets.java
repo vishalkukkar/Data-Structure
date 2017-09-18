@@ -11,15 +11,15 @@ public class SubSets {
 		subsets(a);
 	}
 
-	public static ArrayList<ArrayList<Integer>> subsets(int[] S) {
-		if (S == null)
+	public static ArrayList<ArrayList<Integer>> subsets(int[] nums) {
+		if (nums == null)
 			return null;
 	 
-		Arrays.sort(S);
+		Arrays.sort(nums);
 	 
 		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
 	 
-		for (int i = 0; i < S.length; i++) {
+		for (int i = 0; i < nums.length; i++) {
 			ArrayList<ArrayList<Integer>> temp = new ArrayList<ArrayList<Integer>>();
 	 
 			//get sets that are already in result
@@ -29,12 +29,12 @@ public class SubSets {
 	 
 			//add S[i] to existing sets
 			for (ArrayList<Integer> a : temp) {
-				a.add(S[i]);
+				a.add(nums[i]);
 			}
 	 
 			//add S[i] only as a set
 			ArrayList<Integer> single = new ArrayList<Integer>();
-			single.add(S[i]);
+			single.add(nums[i]);
 			temp.add(single);
 	 
 			result.addAll(temp);

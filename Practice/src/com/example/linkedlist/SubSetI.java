@@ -25,29 +25,33 @@ public class SubSetI {
 
 	}
 
-	private static ArrayList<ArrayList<Integer>> getSubsets(int[] S) {
+	private static List<List<Integer>> getSubsets(int[] nums) {
 
-		Arrays.sort(S);
-		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+		Arrays.sort(nums);
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
 
-		for (int i = 0; i < S.length; i++) {
+	
+				
+		for (int i = 0; i < nums.length; i++) {
 
 			ArrayList<ArrayList<Integer>> temp = new ArrayList<ArrayList<Integer>>();
 
-			for (ArrayList<Integer> t : result) {
+			for (List<Integer> t : result) {
 				temp.add(new ArrayList<Integer>(t));
 			}
 
 			for (ArrayList<Integer> b : temp) {
-				b.add(S[i]);
+				b.add(nums[i]);
 			}
 
 			ArrayList<Integer> single = new ArrayList<Integer>();
-			single.add(S[i]);
+			single.add(nums[i]);
 			temp.add(single);
 			result.addAll(temp);
 		}
 
+		//add empty set
+		result.add(new ArrayList<Integer>());
 		return result;
 
 	}
