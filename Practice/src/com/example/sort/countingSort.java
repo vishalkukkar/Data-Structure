@@ -6,31 +6,31 @@ public class countingSort {
 
 	public static void main(String[] args) {
 
-		int[] array = { 2, 4, 2, 6, 7, 11, 10, 5 };
-		mergeSort(array, 11);
+		int[] array = { 2, 4, 2, 5, 2, 5 };
+		countSort(array, 5);
 	}
 
-	private static void mergeSort(int[] array, int max) {
+	private static void countSort(int[] array, int max) {
 
-		int[] numsCount = new int[max + 1];
-
-		for (int i : array) {
-			numsCount[i]++;
+		int[] temp = new int[max + 1];
+		int[] res = new int[array.length];
+		for (int i = 0; i < array.length; i++) {
+			temp[array[i]]++;
 		}
-
-		int[] sortedArray = new int[array.length];
+		
+		System.out.println(Arrays.toString(temp));
 		int index = 0;
-		for (int i = 0; i < numsCount.length; i++) {
+		for (int i = 0; i < temp.length; i++) {
 
-			int count = numsCount[i];
+			int count = temp[i];
 
 			for (int j = 0; j < count; j++) {
-				sortedArray[index] = i;
+				res[index] = i;
 				index++;
 			}
 		}
 
-		System.out.println(Arrays.toString(sortedArray));
+		System.out.println(Arrays.toString(res));
 	}
 
 }

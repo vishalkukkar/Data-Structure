@@ -1,11 +1,11 @@
 package com.example.java;
 
-public class CustomMap {
+public class CustomHashMap {
 
 	Node[] table;
 	int capacity = 4;
 
-	public CustomMap() {
+	public CustomHashMap() {
 		this.table = new Node[capacity];
 	}
 
@@ -14,7 +14,7 @@ public class CustomMap {
 	}
 
 	public static void main(String[] args) {
-		CustomMap map = new CustomMap();
+		CustomHashMap map = new CustomHashMap();
 		map.put("1", "test1");
 		map.put("2", "test2");
 		map.put("4", "test3");
