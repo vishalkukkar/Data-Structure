@@ -1,4 +1,4 @@
-package com.example.dp;
+package com.example.arrayy;
 
 import java.io.IOException;
 import java.util.ArrayList;

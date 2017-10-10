@@ -43,12 +43,4 @@ public class QuickSort {
 		
 		return pIndex;
 	}
-
-	private static void swap(int i, int j) {
-		int temp = array[i];
-		array[j] = array[i];
-		array[i] = temp;
-
-	}
-
 }
