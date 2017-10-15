@@ -12,14 +12,14 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class LetterCombinationOfString {
 
-	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
+	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {/*
 
 		List<String> list = letterCombinations("23");
 		ObjectMapper mapper = new ObjectMapper();
 		System.out.println(mapper.writeValueAsString(list));
-	}
+	*/}
 
-	public static List<String> letterCombinations(String digits) {
+	/*public static List<String> letterCombinations(String digits) {
 
 		Map<Character, String> map = new HashMap<>();
 		map.put('2', "abc");
@@ -33,7 +33,7 @@ public class LetterCombinationOfString {
 		map.put('0', "");
 		List<String> list = new ArrayList<>();
 
-	}
+	}*/
 
 	private static List<String> getList(Map<Character, String> map, List<String> list, String digits) {
 

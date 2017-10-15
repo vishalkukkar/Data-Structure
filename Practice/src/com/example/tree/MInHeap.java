@@ -25,7 +25,7 @@ public class MInHeap {
 	
 	public void ensureCapacity(){
 		if(size == capacity){
-			Arrays.fill(this.array, capacity * 2);
+			Arrays.copyOf(array, capacity * 2);
 			capacity = capacity * 2;
 		}
 	}
