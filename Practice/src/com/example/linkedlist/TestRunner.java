@@ -47,7 +47,7 @@ public class TestRunner {
 		}
 		ListNode result = myClass.reverseList(head);
 
-		// compare data
+		// compare val
 		Boolean flag = true;
 		while (result != null && head != null && count >= 0) {
 			count--;

@@ -1,12 +1,12 @@
 //package com.example.practice;
 //
-//public class Node {
+//public class TreeNode {
 //
-//	Node next;
+//	TreeNode next;
 //	int val;
 //
-//	Node() {}
-//	Node(int val) {
+//	TreeNode() {}
+//	TreeNode(int val) {
 //		this.val = val;
 //	}
 //}
