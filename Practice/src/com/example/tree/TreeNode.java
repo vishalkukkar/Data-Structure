@@ -65,22 +65,23 @@ public class TreeNode {
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
 
 		ObjectMapper m = new ObjectMapper();
-		TreeNode root = new TreeNode(1);
-		root.insert(2);
-//		root.insert(-10);
-//		root.insert(11);
-//		root.insert(16);
+		TreeNode root = new TreeNode(100);
+		root.insert(45);
+		root.insert(64);
+		root.insert(58);
+		root.insert(68);
+		root.insert(67);
 
-//		TreeNode root2 = new TreeNode(2);
-//		root.insert(3);
-//		root.insert(-7);
-//		root.insert(11);
-//		root.insert(1);
+		// TreeNode root2 = new TreeNode(2);
+		// root.insert(3);
+		// root.insert(-7);
+		// root.insert(11);
+		// root.insert(1);
 
 		// levelOrderPrint(root);
 		// System.out.println(m.writeValueAsString(levelOrder(root)));
-		//TreeNode resultNode = mergeTrees(root, root2);
-		
+		// TreeNode resultNode = mergeTrees(root, root2);
+
 		System.out.println(m.writeValueAsString(rightSideView(root)));
 	}
 
@@ -88,15 +89,26 @@ public class TreeNode {
 	 * https://leetcode.com/problems/binary-tree-right-side-view/description/
 	 */
 	public static List<Integer> rightSideView(TreeNode root) {
-		List<Integer> nodes = new ArrayList<>();
-		if(root == null)
-			return nodes;
-		nodes.add(root.val);
-		while(root != null && root.right != null){
-			nodes.add(root.right.val);
-			root = root.right;
+		LinkedList<TreeNode> queue = new LinkedList<>();
+		List<Integer> result = new ArrayList<>();
+		if (root == null)
+			return result;
+		queue.add(root);
+		while (queue.size() > 0) {
+			int size = queue.size();
+			for (int i = 0; i < size; i++) {
+
+				TreeNode top = queue.remove();
+				if (i == 0)
+					result.add(top.val);
+				if (top.right != null)
+					queue.add(top.right);
+				if (top.left != null)
+					queue.add(top.left);
+			}
+
 		}
-		return nodes;
+		return result;
 	}
 
 	/*
