@@ -16,45 +16,37 @@ public class Palindrome {
 	}
 
 	private static Boolean isPalindrome(ListNode head) {
-
+		
 		ListNode t = head;
-		ListNode reverseNode = reverseList(head);
-
-		while (t != null) {
-			System.out.println(t.val);
-			t = t.next;
-
-		}
-
-		while (reverseNode != null && t != null) {
-			if (reverseNode.val != t.val) {
+		ListNode reverseList = reverseList(head);
+		
+		while(reverseList != null){
+			if(reverseList.val != t.val)
 				return false;
-			} else {
-				reverseNode = reverseNode.next;
-				t = t.next;
-			}
+			reverseList = reverseList.next;
+			t = t.next;
 		}
 		return true;
 	}
 
 	private static ListNode reverseList(ListNode head) {
-
-		if (head == null)
-			return null;
-
-		ListNode p1 = head;
-		ListNode p2 = p1.next;
-
-		head.next = null;
-
-		while (p1 != null && p2 != null) {
-			ListNode temp = p2.next;
-			p2.next = p1;
-			p1 = p2;
-			p2 = temp;
+		
+		if(head == null || head.next == null)
+			return head;
+		
+		ListNode curr = head;
+		ListNode next = null;
+		ListNode prev = null;
+		
+		while(curr != null){
+			next = curr.next;
+			curr.next = prev;
+			prev = curr;
+			curr = next;
+			
 		}
-
-		return p1;
+		
+		return prev;
 	}
 
 }
