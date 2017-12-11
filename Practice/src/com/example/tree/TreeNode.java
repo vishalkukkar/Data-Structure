@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -65,12 +66,13 @@ public class TreeNode {
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
 
 		ObjectMapper m = new ObjectMapper();
-		TreeNode root = new TreeNode(100);
-		root.insert(45);
-		root.insert(64);
-		root.insert(58);
-		root.insert(68);
-		root.insert(67);
+		TreeNode root = new TreeNode(40);
+		root.insert(20);
+		root.insert(10);
+		root.insert(30);
+		root.insert(60);
+		root.insert(50);
+		root.insert(70);
 
 		// TreeNode root2 = new TreeNode(2);
 		// root.insert(3);
@@ -78,11 +80,102 @@ public class TreeNode {
 		// root.insert(11);
 		// root.insert(1);
 
-		// levelOrderPrint(root);
+		levelOrderPrint(root);
+		levelOrderPrintEasy(root);
 		// System.out.println(m.writeValueAsString(levelOrder(root)));
 		// TreeNode resultNode = mergeTrees(root, root2);
+		// System.out.println(m.writeValueAsString(rightSideView(root)));
+		// System.out.println(m.writeValueAsString(iterativeInorderTraversal(root)));
+	}
 
-		System.out.println(m.writeValueAsString(rightSideView(root)));
+	// https://leetcode.com/problems/maximum-depth-of-binary-tree/description/
+	public int maxDepth(TreeNode root) {
+
+		if (root == null)
+			return 0;
+		else {
+
+			int ldepth = maxDepth(root.left);
+			int rdepth = maxDepth(root.right);
+
+			if (ldepth > rdepth)
+				return ldepth + 1;
+			else
+				return rdepth + 1;
+		}
+	}
+
+	// https://leetcode.com/problems/binary-search-tree-iterator/description/
+	public class BSTIterator {
+
+		Stack<TreeNode> stack;
+
+		public BSTIterator(TreeNode root) {
+			stack = new Stack<TreeNode>();
+			TreeNode node = root;
+			while (node != null) {
+				stack.push(node);
+				node = node.left;
+			}
+		}
+
+		/** @return whether we have a next smallest number */
+		public boolean hasNext() {
+			if (stack.isEmpty())
+				return false;
+			return true;
+		}
+
+		/** @return the next smallest number */
+		public int next() {
+			TreeNode node = stack.pop();
+			int val = node.val;
+
+			if (node.right != null) {
+				node = node.right;
+				stack.push(node);
+				while (node.left != null) {
+					stack.push(node.left);
+					node = node.left;
+				}
+			}
+
+			return val;
+
+		}
+	}
+
+	// https://leetcode.com/problems/binary-tree-inorder-traversal/description/
+	private static List<Integer> iterativeInorderTraversal(TreeNode root) {
+
+		List<Integer> iterative = new ArrayList<>();
+		TreeNode node = root;
+		Stack<TreeNode> stack = new Stack<>();
+
+		// add all the nodes on the left first
+		while (node != null) {
+			stack.push(node);
+			node = node.left;
+		}
+
+		while (!stack.isEmpty()) {
+			node = stack.pop();
+			iterative.add(node.val);
+
+			// check if above node has right child
+			// if yes add all left child of this right child
+			if (node.right != null) {
+				node = node.right;
+
+				while (node != null) {
+					stack.push(node);
+					node = node.left;
+				}
+			}
+
+		}
+
+		return iterative;
 	}
 
 	/*
@@ -168,7 +261,7 @@ public class TreeNode {
 
 	}
 
-	public static void levelOrderPrint(TreeNode root) {
+	public static void levelOrderPrint1(TreeNode root) {
 
 		LinkedList<TreeNode> queue = new LinkedList<>();
 		queue.add(root);
@@ -183,6 +276,58 @@ public class TreeNode {
 				queue.add(curr.right);
 		}
 
+	}
+
+	public static void levelOrderPrint(TreeNode root) {
+
+		List<Integer> subList = new ArrayList<>();
+		List<List<Integer>> list = new ArrayList<>();
+
+		LinkedList<TreeNode> curr = new LinkedList<>();
+		LinkedList<TreeNode> next = new LinkedList<>();
+		curr.add(root);
+
+		while (!curr.isEmpty()) {
+			TreeNode temp = curr.remove();
+			subList.add(temp.val);
+			System.out.print(temp.val);
+
+			if (temp.left != null)
+				next.add(temp.left);
+
+			if (temp.right != null)
+				next.add(temp.right);
+
+			if (curr.isEmpty()) {
+				System.out.println();
+				curr = next;
+				next = new LinkedList<>();
+				list.add(subList);
+				subList = new ArrayList<>();
+			}
+
+		}
+
+	}
+
+	public static void levelOrderPrintEasy(TreeNode root) {
+
+		LinkedList<TreeNode> queue = new LinkedList<>();
+		queue.add(root);
+		while (!queue.isEmpty()) {
+			int size = queue.size();
+			System.out.println();
+			for (int i = 0; i < size; i++) {
+				TreeNode t = queue.remove();
+				System.out.print(t.val);
+
+				if (t.left != null)
+					queue.add(t.left);
+				if (t.right != null)
+					queue.add(t.right);
+
+			}
+		}
 	}
 
 }
