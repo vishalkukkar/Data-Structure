@@ -1,5 +1,7 @@
 package com.example.stack;
 
+import java.util.LinkedList;
+
 public class Queue {
 
 	Node head;
@@ -11,7 +13,7 @@ public class Queue {
 			tail =head;
 		} else {
 			tail.next  = n ;
-			tail = n;
+			tail = tail.next;
 
 		}
 	}
@@ -35,6 +37,10 @@ public class Queue {
 
 	public static void main(String[] args) {
 
+		LinkedList<Integer> l = new LinkedList<>();
+		l.
+		
+		
 		Queue q = new Queue();
 		q.enqueue(new Node(1));
 		q.enqueue(new Node(2));

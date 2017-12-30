@@ -1,10 +1,12 @@
 package com.example.linkedlist;
 
+import java.util.Stack;
+
 public class AddTwoNumbers {
 
 	public static void main(String[] args) {
 
-		ListNode head = new ListNode(7);
+		/*ListNode head = new ListNode(7);
 
 		ListNode head2 = new ListNode(8);
 		
@@ -13,7 +15,14 @@ public class AddTwoNumbers {
 		while (res != null) {
 			System.out.println(res.val);
 			res = res.next;
-		}
+		}*/
+		
+		Stack<Integer> s = new Stack<Integer>();
+		s.push(22);
+		s.push(2);
+		s.push(3);
+		
+		System.out.println(s.get(0));
 	}
 
 	private static ListNode addTwoNumbers(ListNode l1, ListNode l2) {

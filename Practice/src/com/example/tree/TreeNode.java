@@ -80,12 +80,53 @@ public class TreeNode {
 		// root.insert(11);
 		// root.insert(1);
 
-		levelOrderPrint(root);
-		levelOrderPrintEasy(root);
+//		levelOrderPrint(root);
+//		levelOrderPrintEasy(root);
+		levelOrderList(root);
 		// System.out.println(m.writeValueAsString(levelOrder(root)));
 		// TreeNode resultNode = mergeTrees(root, root2);
 		// System.out.println(m.writeValueAsString(rightSideView(root)));
 		// System.out.println(m.writeValueAsString(iterativeInorderTraversal(root)));
+	}
+
+	public static List<List<TreeNode>> levelOrderList(TreeNode root) {
+
+		List<List<Integer>> result = new ArrayList<>();
+		LinkedList<TreeNode> queue = new LinkedList<>();
+		queue.add(root);
+
+		while (!queue.isEmpty()) {
+			List<Integer> sublist = new ArrayList<>();
+			int size = queue.size();
+			System.out.println();
+			for (int i = 0; i < size; i++) {
+				TreeNode curr = queue.remove();
+				sublist.add(curr.val);
+				if (curr.left != null)
+					queue.add(curr.left);
+				if (curr.right != null)
+					queue.add(curr.right);
+			}
+			
+			result.add(sublist);
+		}
+
+		ObjectMapper m = new ObjectMapper();
+		
+		try {
+			System.out.println(m.writeValueAsString(result));
+		} catch (JsonGenerationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
 	// https://leetcode.com/problems/maximum-depth-of-binary-tree/description/

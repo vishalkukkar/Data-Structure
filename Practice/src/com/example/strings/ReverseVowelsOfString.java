@@ -21,9 +21,9 @@ public class ReverseVowelsOfString {
 				char temp = array[i];
 				array[i] = array[j];
 				array[j] = temp;
-
 				i++;
 				j--;
+				
 			} else if (left) {
 				j--;
 			} else {
