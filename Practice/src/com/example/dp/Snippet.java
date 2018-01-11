@@ -39,6 +39,7 @@ public class Snippet {
 				}
 			}
 			
+			System.out.println(new ObjectMapper().writeValueAsString(currSet));
 			result = new ArrayList<List<Integer>>(currSet);
 		}
 		return result;

@@ -73,6 +73,7 @@ public class WordLadder {
 
 					String string = new String(array);
 					if (wordList.contains(string)) {
+						System.out.println(wordNode.numSteps);
 						queue.add(new wordNode(string, wordNode.numSteps + 1));
 						wordList.remove(string);
 					}
