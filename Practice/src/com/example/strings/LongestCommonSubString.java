@@ -1,7 +1,5 @@
 package com.example.strings;
 
-import java.lang.reflect.Array;
-
 public class LongestCommonSubString {
 
 	public static void main(String[] args) {

@@ -38,7 +38,6 @@ public class Queue {
 	public static void main(String[] args) {
 
 		LinkedList<Integer> l = new LinkedList<>();
-		l.
 		
 		
 		Queue q = new Queue();

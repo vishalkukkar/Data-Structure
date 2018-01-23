@@ -1,16 +1,13 @@
 package com.example.strings;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class LongestCommonSequence {
 
 	public static void main(String[] args) {
 
-//		System.out.println(lengthOfLongestSubstring("abcab"));
+		// System.out.println(lengthOfLongestSubstring("abcab"));
 		char[] c = new char[26];
 		String sample = "vishal";
 		for (int i = 0; i < sample.length(); i++) {
@@ -18,15 +15,12 @@ public class LongestCommonSequence {
 			c[sample.charAt(i) - 'a']++;
 		}
 		System.out.println(new String(c));
-		
-		List<Integer> l = new List<Integer>();
-		
+
 	}
 
 	public static int lengthOfLongestSubstring(String s) {
 		int n = s.length();
 		Set<Character> set = new HashSet<>();
-		Map<Integer,Integer> map = new HashMap<>();
 		int ans = 0, i = 0, j = 0;
 		while (i < n && j < n) {
 			// try to extend the range [i, j]

@@ -1,13 +1,11 @@
-package com.example.sort;
+package com.example.java;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.omg.Messaging.SyncScopeHelper;
-
-public class Person {
+public class Person implements Comparable<Person> {
 
 	private int id;
 	private String name;
@@ -53,6 +51,11 @@ public class Person {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	@Override
+	public String toString() {
+		return "Person [id=" + id + ", name=" + name + ", Surname=" + Surname + ", email=" + email + "]";
+	}
 
 	public static void main(String[] args) {
 
@@ -73,6 +76,16 @@ public class Person {
 		});
 
 		list.forEach(item -> System.out.println(item.getId()));
+	}
+
+	@Override
+	public int compareTo(Person o) {
+		if (this.id > o.id)
+			return 1;
+		else if (this.id < o.id)
+			return -1;
+		else
+			return 0;
 	}
 
 }

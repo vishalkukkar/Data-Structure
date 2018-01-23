@@ -23,12 +23,35 @@ public class TwoSUm {
 
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
 
-		int[] array = { 2, 2,2,2,2,2,2,2,2,5,5,5,5 };
+		int[] array = { 2, 1, 3, 46, 1, 9};
 		// 2,3,3,4,5
-		ObjectMapper m = new ObjectMapper();
-		// System.out.println(m.writeValueAsString(twoSumMap(array, 7)));
-		System.out.println(twoSumMapCount(array, 7));
-		System.out.println(twoSumWithoutSort(array, 7));
+		/*
+		 * ObjectMapper m = new ObjectMapper(); //
+		 * System.out.println(m.writeValueAsString(twoSumMap(array, 7)));
+		 * System.out.println(twoSumMapCount(array, 7));
+		 * System.out.println(twoSumWithoutSort(array, 7));
+		 */
+
+		System.out.println(TwoSumCountManan(array, 47));
+	}
+
+	private static Integer TwoSumCountManan(int[] array, int target) {
+		int count = 0;
+
+		Map<Integer, Integer> map = new HashMap<>();
+		for (int i = 0; i < array.length; i++) {
+			if (map.containsKey(array[i])) {
+
+				if (map.get(array[i]) == 1) {
+					map.put(array[i], -1);
+					count++;
+				}
+			} else {
+				map.put(target - array[i], 1);
+			}
+		}
+
+		return count;
 	}
 
 	// {2,2,5,5} 7
@@ -41,17 +64,16 @@ public class TwoSUm {
 				count++;
 				int temp = resMap.get(arr[i]);
 				temp--;
-				if (temp <= 0) 
+				if (temp <= 0)
 					resMap.remove(arr[i]);
-				 else 
+				else
 					resMap.put(arr[i], temp);
-				
+
 			} else {
 				if (resMap.containsKey(diff))
 					resMap.put(diff, resMap.get(diff) + 1);
-				 else 
+				else
 					resMap.put(diff, 1);
-				
 
 			}
 		}

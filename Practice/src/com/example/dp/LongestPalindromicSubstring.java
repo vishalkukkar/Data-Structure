@@ -4,34 +4,43 @@ public class LongestPalindromicSubstring {
 
 	public static void main(String[] args) {
 
-		System.out.println(longestPalindrome("banana"));
+		Long s = System.currentTimeMillis();
+		System.out.println(longestPalindrome(
+				"a"));
+
+		System.out.println("time :"+(System.currentTimeMillis() - s));
 	}
-	
-	
+
 	public static String longestPalindrome(String s) {
-	    if(s==null || s.length()<=1)
-	        return s;
-	 
-	    int len = s.length();
-	    int maxLen = 1;
-	    boolean [][] dp = new boolean[len][len];
-	 
-	    String longest = null;
-	    for(int l=0; l<s.length(); l++){
-	        for(int i=0; i<len-l; i++){
-	            int j = i+l;
-	            if(s.charAt(i)==s.charAt(j) && (j-i<=2||dp[i+1][j-1])){
-	                dp[i][j]=true;
-	 
-	                if(j-i+1>maxLen){
-	                   maxLen = j-i+1; 
-	                   longest = s.substring(i, j+1);
-	                }
-	            }
-	        }
-	    }
-	 
-	    return longest;
+
+		String string = s.substring(0, 1);
+		for (int i = 0; i < s.length(); i++) {
+
+			// even string
+			String temp1 = isPalidrome(i, i, s);
+			if (temp1.length() > string.length()) {
+				string = temp1;
+			}
+
+			// odd string
+			String temp2 = isPalidrome(i, i + 1, s);
+			if (temp2.length() > string.length()) {
+				string = temp2;
+			}
+		}
+		return string;
+	}
+
+	private static String isPalidrome(int i, int j, String s) {
+
+		while (i >= 0 && j < s.length()) {
+			if (s.charAt(i) != s.charAt(j))
+				break;
+			i--;
+			j++;
+		}
+
+		return s.substring(i + 1, j);
 	}
 
 }
