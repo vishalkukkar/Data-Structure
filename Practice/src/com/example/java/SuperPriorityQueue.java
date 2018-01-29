@@ -9,7 +9,12 @@ import java.util.Set;
 /**
  * Implement a super queue from set of priority queues
  * 
- * 0 2 1 q1 4 3 5 q2 8 9 7 q3 peek() - should return 0; poll() - should remove 0
+ * 0 2 1 q1 
+ * 4 3 5 q2 
+ * 8 9 7 q3 
+ * 
+ * peek() - should return 0; 
+ * poll() - should remove 0
  * from q1;
  * 
  * Note : Don't add all queues to single priority queue as items can be infinite
