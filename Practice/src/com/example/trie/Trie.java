@@ -6,13 +6,16 @@ public class Trie {
 
 	public static void main(String[] args) {
 
+		
+		System.out.println();
+		
 		String string1 = "abcd";
 		String string2 = "bcd";
 		Trie d = new Trie();
 		d.insert(string1);
 		d.insert(string2);
-		// System.out.println(d.search("abcd"));
-		System.out.println(d.startsWith("bcpo"));
+		 System.out.println(d.search("abcd"));
+		//System.out.println(d.startsWith("bcpo"));
 	}
 
 	private Boolean search(String word) {
@@ -27,7 +30,6 @@ public class Trie {
 
 		}
 		return curr.endOfWord;
-
 	}
 
 	private void insert(String word) {

@@ -2,8 +2,10 @@ package com.example.tree;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 import org.codehaus.jackson.JsonGenerationException;
@@ -63,30 +65,98 @@ public class TreeNode {
 		return false;
 	}
 
+	static int [] array = new int[7];
+	static int index = 0;
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
 
 		ObjectMapper m = new ObjectMapper();
 		TreeNode root = new TreeNode(40);
-		root.insert(20);
-		root.insert(10);
 		root.insert(30);
-		root.insert(60);
 		root.insert(50);
-		root.insert(70);
+		root.insert(45);
+		root.insert(55);
+		root.insert(25);
+		root.insert(35);
+		
+		
+		List<List<Integer>> list = verticalOrder(root);
+		System.out.println(m.writeValueAsString(list));
+		
+/*		validateBinaryTree(root);
+		
+		for (int i = 0; i < array.length; i++) {
+			System.out.println(array[i]);
+		}
+		 levelOrderPrint(root);
+         levelOrderPrintEasy(root);
+	     levelOrderList(root);
+		 System.out.println(m.writeValueAsString(levelOrder(root)));
+		 TreeNode resultNode = mergeTrees(root, root2);
+		 System.out.println(m.writeValueAsString(rightSideView(root)));
+		 System.out.println(m.writeValueAsString(iterativeInorderTraversal(root)));*/
+	}
+	
+	
+	public static List<List<Integer>> verticalOrder(TreeNode root) {
+		
+		List<List<Integer>> result = new ArrayList<>();
+		Map<Integer,List<Integer>> map = new HashMap<>();
+		
+		LinkedList<TreeNode> queue = new LinkedList<>();
+		LinkedList<Integer> level = new LinkedList<>();
+		
+		queue.add(root);
+		level.add(0);
+		int min = Integer.MAX_VALUE;
+		int max = Integer.MIN_VALUE;
+		
+		while(!queue.isEmpty()){
+			
+			TreeNode curr = queue.remove();
+			int l = level.remove();
+			
+			min = Math.min(min, l);
+			max = Math.max(max, l);
+			
+			if(map.containsKey(l)){
+				List<Integer> temp = map.get(l);
+				temp.add(curr.val);
+				map.put(l, temp);
+			}else{
+				List<Integer> temp = new ArrayList<>();
+				temp.add(curr.val);
+				map.put(l, temp);
+			}
+			
+			if(curr.left != null){
+				queue.add(curr.left);
+				level.add(l - 1);
+			}
+			
+			if(curr.right != null){
+				queue.add(curr.right);
+				level.add(l + 1);
+			}
+		}
+		
+		
+		for (int i = min; i <= max; i++) {
+			
+			result.add(map.get(i));
+		}
+		return result;
+        
+    }
 
-		// TreeNode root2 = new TreeNode(2);
-		// root.insert(3);
-		// root.insert(-7);
-		// root.insert(11);
-		// root.insert(1);
-
-//		levelOrderPrint(root);
-//		levelOrderPrintEasy(root);
-		levelOrderList(root);
-		// System.out.println(m.writeValueAsString(levelOrder(root)));
-		// TreeNode resultNode = mergeTrees(root, root2);
-		// System.out.println(m.writeValueAsString(rightSideView(root)));
-		// System.out.println(m.writeValueAsString(iterativeInorderTraversal(root)));
+	private static void validateBinaryTree(TreeNode root) {
+		if(root == null)
+			return;
+		
+		validateBinaryTree(root.left);
+		array[index] = root.val;
+		index++;
+		validateBinaryTree(root.right);
+		
 	}
 
 	public static List<List<TreeNode>> levelOrderList(TreeNode root) {
