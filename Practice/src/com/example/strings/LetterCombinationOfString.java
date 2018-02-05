@@ -19,19 +19,21 @@ public class LetterCombinationOfString {
 
 	public static List<String> letterCombinations(String digits) {
 		String[] mapping = new String[] { "0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
-		LinkedList<String> ans = new LinkedList<>();
-		ans.add("");
+		LinkedList<String> queue = new LinkedList<>();
+		queue.add("");
 		for (int i = 0; i < digits.length(); i++) {
 			int num = Integer.parseInt("" + digits.charAt(i));
 			char[] array = mapping[num].toCharArray();
-			while (ans.peek().length() == i) {
-				String temp = ans.remove();
-				for (int j = 0; j < mapping[num].toCharArray().length; j++) {
-					ans.add(temp + array[j]);
+
+			int size = queue.size();
+			for (int j = 0; j < size; j++) {
+				String temp = queue.remove();
+				for (int k = 0; k < array.length; k++) {
+					queue.add(temp + array[k]);
 				}
 			}
 		}
-		return ans;
+		return queue;
 	}
 
 }

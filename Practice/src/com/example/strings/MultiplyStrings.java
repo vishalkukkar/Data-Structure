@@ -7,7 +7,16 @@ public class MultiplyStrings {
 		String num1 = "456";
 		String num2 = "123";
 
-		System.out.println(" ans "+multiply(num1, num2));
+	//	System.out.println(" ans "+multiply(num1, num2));
+		System.out.println("ans "+multplyStrings(num1,num2));
+	}
+
+	private static String multplyStrings(String num1, String num2) {
+		
+		
+		
+		
+		
 	}
 
 	public static String multiply(String num1, String num2) {
