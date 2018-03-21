@@ -5,10 +5,12 @@ public class LongestPalindromicSubstring {
 	public static void main(String[] args) {
 
 		Long s = System.currentTimeMillis();
-		System.out.println(longestPalindrome(
-				"a"));
+//		System.out.println(longestPalindrome(
+//				"abcabacb"));
 
-		System.out.println("time :"+(System.currentTimeMillis() - s));
+		
+		System.out.println("abcabacb".substring(3,6));
+		//System.out.println("time :"+(System.currentTimeMillis() - s));
 	}
 
 	public static String longestPalindrome(String s) {
@@ -40,6 +42,8 @@ public class LongestPalindromicSubstring {
 			j++;
 		}
 
+		System.out.println(i + " "+ j);
+		System.out.println(s.substring(i + 1, j));
 		return s.substring(i + 1, j);
 	}
 

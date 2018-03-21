@@ -1,5 +1,8 @@
 package com.example.linkedlist;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ListNode {
 
 	int val;
@@ -14,6 +17,7 @@ public class ListNode {
 		
 	}
 	public static void main(String args[]){
+		
 		
 		int[] array = {1,2,3,4,5,6};
 		ListNode res = createLinkedList(array);

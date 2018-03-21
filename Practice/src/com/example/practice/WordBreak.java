@@ -8,10 +8,12 @@ public class WordBreak {
 
 	public static void main(String[] args) {
 
-		String s = "aaaaaaa";
+		String s = "leetcode";
 		List<String> dict = new ArrayList<>();
-		dict.add("aaaa");
-		dict.add("aaa");
+		dict.add("xyz");
+		dict.add("leet");
+		dict.add("abc");
+		dict.add("code");
 
 		System.out.println(wordBreak(s, dict));
 	}

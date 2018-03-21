@@ -15,7 +15,7 @@ public class RotateMatrix {
 						   { 7, 8, 9 } };
 		
 		
-		
+		System.out.println(array[0].length);
 		System.out.println(Arrays.deepToString(array1));
 		rotateMatrix(array1);
 

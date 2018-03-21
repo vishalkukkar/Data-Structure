@@ -1,8 +1,9 @@
 package com.example.linkedlist;
 
+import java.io.Serializable;
 import java.util.Stack;
 
-public class AddTwoNumbers {
+public class AddTwoNumbers implements Serializable {
 
 	public static void main(String[] args) {
 
@@ -22,7 +23,6 @@ public class AddTwoNumbers {
 		s.push(2);
 		s.push(3);
 		
-		System.out.println(s.get(0));
 	}
 
 	private static ListNode addTwoNumbers(ListNode l1, ListNode l2) {

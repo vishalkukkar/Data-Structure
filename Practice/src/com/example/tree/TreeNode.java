@@ -65,8 +65,9 @@ public class TreeNode {
 		return false;
 	}
 
-	static int [] array = new int[7];
+	static int[] array = new int[7];
 	static int index = 0;
+
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
 
 		ObjectMapper m = new ObjectMapper();
@@ -77,86 +78,83 @@ public class TreeNode {
 		root.insert(55);
 		root.insert(25);
 		root.insert(35);
-		
-		
+
 		List<List<Integer>> list = verticalOrder(root);
 		System.out.println(m.writeValueAsString(list));
-		
-/*		validateBinaryTree(root);
-		
-		for (int i = 0; i < array.length; i++) {
-			System.out.println(array[i]);
-		}
-		 levelOrderPrint(root);
-         levelOrderPrintEasy(root);
-	     levelOrderList(root);
-		 System.out.println(m.writeValueAsString(levelOrder(root)));
-		 TreeNode resultNode = mergeTrees(root, root2);
-		 System.out.println(m.writeValueAsString(rightSideView(root)));
-		 System.out.println(m.writeValueAsString(iterativeInorderTraversal(root)));*/
+
+		/*
+		 * validateBinaryTree(root);
+		 * 
+		 * for (int i = 0; i < array.length; i++) {
+		 * System.out.println(array[i]); } levelOrderPrint(root);
+		 * levelOrderPrintEasy(root); levelOrderList(root);
+		 * System.out.println(m.writeValueAsString(levelOrder(root))); TreeNode
+		 * resultNode = mergeTrees(root, root2);
+		 * System.out.println(m.writeValueAsString(rightSideView(root)));
+		 * System.out.println(m.writeValueAsString(iterativeInorderTraversal(
+		 * root)));
+		 */
 	}
-	
-	
+
 	public static List<List<Integer>> verticalOrder(TreeNode root) {
-		
+
 		List<List<Integer>> result = new ArrayList<>();
-		Map<Integer,List<Integer>> map = new HashMap<>();
-		
+		Map<Integer, List<Integer>> map = new HashMap<>();
+
 		LinkedList<TreeNode> queue = new LinkedList<>();
 		LinkedList<Integer> level = new LinkedList<>();
-		
+
 		queue.add(root);
 		level.add(0);
 		int min = Integer.MAX_VALUE;
 		int max = Integer.MIN_VALUE;
-		
-		while(!queue.isEmpty()){
-			
+
+		while (!queue.isEmpty()) {
+
 			TreeNode curr = queue.remove();
 			int l = level.remove();
-			
+
 			min = Math.min(min, l);
 			max = Math.max(max, l);
-			
-			if(map.containsKey(l)){
+
+			if (map.containsKey(l)) {
 				List<Integer> temp = map.get(l);
 				temp.add(curr.val);
 				map.put(l, temp);
-			}else{
+			} else {
 				List<Integer> temp = new ArrayList<>();
 				temp.add(curr.val);
 				map.put(l, temp);
 			}
-			
-			if(curr.left != null){
+
+			if (curr.left != null) {
 				queue.add(curr.left);
 				level.add(l - 1);
 			}
-			
-			if(curr.right != null){
+
+			if (curr.right != null) {
 				queue.add(curr.right);
 				level.add(l + 1);
 			}
 		}
-		
-		
+
 		for (int i = min; i <= max; i++) {
-			
+
 			result.add(map.get(i));
 		}
 		return result;
-        
-    }
+
+	}
 
 	private static void validateBinaryTree(TreeNode root) {
-		if(root == null)
+		if (root == null)
 			return;
-		
+
 		validateBinaryTree(root.left);
 		array[index] = root.val;
 		index++;
 		validateBinaryTree(root.right);
-		
+
 	}
 
 	public static List<List<TreeNode>> levelOrderList(TreeNode root) {
@@ -177,12 +175,12 @@ public class TreeNode {
 				if (curr.right != null)
 					queue.add(curr.right);
 			}
-			
+
 			result.add(sublist);
 		}
 
 		ObjectMapper m = new ObjectMapper();
-		
+
 		try {
 			System.out.println(m.writeValueAsString(result));
 		} catch (JsonGenerationException e) {
@@ -259,34 +257,32 @@ public class TreeNode {
 	// https://leetcode.com/problems/binary-tree-inorder-traversal/description/
 	private static List<Integer> iterativeInorderTraversal(TreeNode root) {
 
-		List<Integer> iterative = new ArrayList<>();
-		TreeNode node = root;
+		List<Integer> list = new ArrayList<>();
 		Stack<TreeNode> stack = new Stack<>();
 
-		// add all the nodes on the left first
-		while (node != null) {
-			stack.push(node);
-			node = node.left;
+		if (root == null)
+			return list;
+
+		while (root != null) {
+			stack.push(root);
+			root = root.left;
 		}
 
 		while (!stack.isEmpty()) {
-			node = stack.pop();
-			iterative.add(node.val);
 
-			// check if above node has right child
-			// if yes add all left child of this right child
-			if (node.right != null) {
-				node = node.right;
+			TreeNode temp = stack.pop();
+			list.add(temp.val);
 
-				while (node != null) {
-					stack.push(node);
-					node = node.left;
-				}
+			temp = temp.right;
+
+			while (temp != null) {
+				stack.push(temp);
+				temp = temp.left;
 			}
 
 		}
 
-		return iterative;
+		return list;
 	}
 
 	/*

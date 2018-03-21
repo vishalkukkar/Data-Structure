@@ -22,12 +22,17 @@ The number of ways decoding "12" is 2.
 public class DecodeWays {
 
 	public static void main(String[] args) {
-
+		
+		String num = "123";
+		
 	}
 
 	public int numDecodings(String s) {
 		
-		int[] array = {'A','B','C'};
+		int j = 1;
+		for (int i = 0; i < s.length(); i++) {
+			
+		}
 		return 0;
 
 	}

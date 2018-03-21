@@ -34,6 +34,25 @@ public class TwoSUm {
 
 		System.out.println(TwoSumCountManan(array, 47));
 	}
+	
+	private static Integer TwoSumCountKuntal(int[] array, int target) {
+		int count = 0;
+
+		Map<Integer, Integer> map = new HashMap<>();
+		for (int i = 0; i < array.length; i++) {
+			if (map.containsKey(array[i])) {
+
+				if (map.get(array[i]) == 1) {
+					map.put(array[i], -1);
+					count++;
+				}
+			} else {
+				map.put(target - array[i], 1);
+			}
+		}
+
+		return count;
+	}
 
 	private static Integer TwoSumCountManan(int[] array, int target) {
 		int count = 0;
