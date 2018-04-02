@@ -1,8 +1,5 @@
 package com.example.linkedlist;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ListNode {
 
 	int val;
