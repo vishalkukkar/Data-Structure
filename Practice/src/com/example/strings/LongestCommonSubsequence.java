@@ -22,16 +22,16 @@ public class LongestCommonSubsequence {
 		for (int i = 0; i <= x.length; i++) {
 			for (int j = 0; j <= y.length; j++) {
 
-				if (i == 0 || j == 0) {
+				if (i == 0 || j == 0)
 					array[i][j] = 0;
-				} else if (x[i - 1] == y[j - 1]) {
-					array[i][j] = array[i - 1][j - 1] + 1;
-				} else {
+				else if (x[i - 1] == y[j - 1])
+					array[i][j] = 1 + array[i - 1][j - 1];
+				else
 					array[i][j] = Math.max(array[i - 1][j], array[i][j - 1]);
-				}
 
 			}
 		}
+
 		return array[m][n];
 	}
 }
