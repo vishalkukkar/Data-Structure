@@ -1,17 +1,27 @@
 package com.example.strings;
 
-import java.util.Arrays;
+import java.math.BigInteger;
 
 public class VersionCompare {
 
 	public static void main(String[] args) {
-		System.out.println(compareVersion("1", "1.1"));
+		System.out.println(compareVersion2("1", "1.1.1"));
 
+	}
+
+	public static int compareVersion2(String version1, String version2) {
+
+		if (version1 == null || version2 == null)
+			return 0;
+
+		BigInteger v1 = BigInteger.valueOf(Long.valueOf(version1.replace(".", "")));
+		BigInteger v2 = BigInteger.valueOf(Long.valueOf(version2.replace(".", "")));
+
+		return v1.compareTo(v2);
 	}
 
 	public static int compareVersion(String version1, String version2) {
 		if (version1 == null || version2 == null)
-
 			if (version1.equalsIgnoreCase(version2))
 				return 0;
 		String[] v1 = version1.split("\\.");
@@ -45,8 +55,8 @@ public class VersionCompare {
 					v4[i] = v1[i];
 			}
 		}
-//		System.out.println("v1 " + Arrays.toString(v4));
-//		System.out.println("v2 :" + Arrays.toString(v3));
+		// System.out.println("v1 " + Arrays.toString(v4));
+		// System.out.println("v2 :" + Arrays.toString(v3));
 
 		for (int i = 0; i < v3.length; i++) {
 

@@ -5,101 +5,113 @@ import java.util.Map;
 
 public class LRUCache {
 
+	public static void main(String[] args) {
+
+		LRUCache cache = new LRUCache(2);
+		cache.put(1, 1);
+		cache.put(2, 2);
+		System.out.println(cache.get(1));// returns 1
+		cache.put(3, 3); // evicts key 2
+		System.out.println(cache.get(2)); // returns -1 (not found)
+		cache.put(4, 4); // evicts key 1
+		System.out.println(cache.get(1)); // returns -1 (not found)
+		System.out.println(cache.get(3)); // returns 3
+		System.out.println(cache.get(4));// returns 4
+
+	}
+
 	public static class DoublyLinkedList {
-		DoublyLinkedList next;
+
+		int key;
+		int value;
 		DoublyLinkedList prev;
-		Integer key;
-		Integer val;
-	}
+		DoublyLinkedList next;
 
-	Integer capacity;
-	DoublyLinkedList head;
-	DoublyLinkedList tail;
-	Map<Integer, DoublyLinkedList> map = new HashMap<Integer, DoublyLinkedList>();
-
-	public LRUCache(int capacity) {
-		this.capacity = capacity;
-		head = new DoublyLinkedList();
-		tail = new DoublyLinkedList();
-
-		head.next = tail;
-		tail.prev = head;
+		DoublyLinkedList(int key, int value) {
+			this.key = key;
+			this.value = value;
+		}
 
 	}
 
-	private void put(int key, int val) {
+	int Capacity;
+	DoublyLinkedList head = null;
+	DoublyLinkedList tail = null;
+	Map<Integer, DoublyLinkedList> map = new HashMap<>();
 
+	LRUCache(int capacity) {
+		this.Capacity = capacity;
+	}
+
+	private void remove(DoublyLinkedList node) {
+
+		DoublyLinkedList prev = node.prev;
+		DoublyLinkedList next = node.next;
+
+		if (prev != null) {
+			prev.next = next;
+		} else {
+			head = next;
+		}
+
+		if (next != null)
+			next.prev = prev;
+		else
+			tail = prev;
+
+	}
+
+	private void addToHead(DoublyLinkedList node) {
+
+		node.next = head;
+		node.prev = null;
+
+		// check if head is null
+		if (head != null) {
+			head.prev = node;
+			head = node;
+		}
+
+		if (tail == null)
+			tail = node;
+
+	}
+
+	private void put(int key, int value) {
 		DoublyLinkedList node = map.get(key);
-
 		if (node == null) {
-			
-			capacity--;
-			node = new DoublyLinkedList();
-			node.key = key;
-			node.val = val;
-			
-			map.put(key, node);
-			moveToHead(node);
-			
-			if(capacity < 0){
-				
-				DoublyLinkedList temp = removeTailnode();
-				map.remove(temp.key);
-				capacity++;
+			// create new node
+			node = new DoublyLinkedList(key, value);
+			if (map.size() >= Capacity) {
+				map.remove(tail.key);
+				remove(tail);
+				addToHead(node);
+			} else {
+				addToHead(node);
 			}
-		}else{
-			
-			node.val = val;
 			map.put(key, node);
-			moveToHead(node);
+		} else {
+			// node already exist
+			// update node vaue and move to head
+			map.put(key, node);
+			remove(node);
+			addToHead(node);
 		}
 	}
 
-	private DoublyLinkedList removeTailnode() {
-		DoublyLinkedList temp = tail.prev;
-		remove(temp);
-		return temp;
-	}
-
-	private void remove(DoublyLinkedList temp) {
-		
-		DoublyLinkedList p = temp.prev;
-		DoublyLinkedList q = temp.next;
-		
-		p.next = q;
-		q.prev = p;
-		
-		
-	}
-
-	private void moveToHead(DoublyLinkedList node) {
-		
-		node.prev = head;
-		node.next = head.next;
-		
-		head.next = node;
-		node.next.prev = node;
-		
-	}
-
-	public static void main(String[] args) {
-
-		LRUCache lru = new LRUCache(2);
-		lru.put(2, 2);
-		lru.put(1, 3);
-		
-		System.out.println(lru.get(1));
-
-	}
-
 	private Integer get(int key) {
-		
+
 		DoublyLinkedList node = map.get(key);
-		
-		remove(node);
-		moveToHead(node);
-		
-		return node.val;
+
+		if (node == null)
+			return -1;
+		else {
+			remove(node);
+			addToHead(node);
+		}
+
+		return node.value;
+
 	}
 
 }

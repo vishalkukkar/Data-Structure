@@ -4,11 +4,11 @@ public class LongestSubStrWithoutRepeatingChars {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String string = "pwwkew";
+		String string = "abcdc";
 		String sub = "wke";
 
 		System.out.println(lengthOfLongestSubstring(string));
-
+		//start 1 2 
 	}
 
 	public static int lengthOfLongestSubstring(String s) {
