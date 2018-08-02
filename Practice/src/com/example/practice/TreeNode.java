@@ -1,5 +1,6 @@
 package com.example.practice;
 
+import java.lang.reflect.Executable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -65,7 +66,7 @@ public class TreeNode {
 	public static void main(String[] args) {
 
 		
-		HashMap<Set<Integer>,Integer> map = new HashMap<>();
+		/*HashMap<Set<Integer>,Integer> map = new HashMap<>();
 		
 		Set<Integer> s1 = new HashSet<>();
 		Set<Integer> s2 = new HashSet<>();
@@ -76,7 +77,7 @@ public class TreeNode {
 		System.out.println(s2.hashCode());
 		
 		System.out.println(map.get(s1));
-		System.out.println(map.get(s2));
+		System.out.println(map.get(s2));*/
 		
 		TreeNode n = new TreeNode(50);
 		n.insert(20);
@@ -85,6 +86,8 @@ public class TreeNode {
 		n.insert(70);
 		n.insert(30);
 
+		n.levelOrderNoExtraMemory(n);
+		
 		/*
 		 * n.inorderTraversal(); System.out.println("inorder order");
 		 * n.preTraversal(); System.out.println("pre order"); n.postTraversal();
@@ -95,6 +98,40 @@ public class TreeNode {
 
 		//System.out.println(n.searchNearestNode(61, n));
 
+	}
+
+	private void levelOrderNoExtraMemory(TreeNode root) {
+		
+		if(root == null) return;
+		TreeNode temp = root;
+		int height = getMaxheightOfTree(root);
+		for (int i = 1; i <= height; i++) {
+			printLevel(temp,i);
+			System.out.println();
+		}
+	}
+
+	private void printLevel(TreeNode root, int level) {
+		
+		if(root == null)
+			return;
+		else if(level == 1){
+			System.out.print(" "+root.val);
+		}else{
+			printLevel(root.left, level - 1);
+			printLevel(root.right, level - 1);
+		}
+		
+	}
+
+	private int getMaxheightOfTree(TreeNode root) {
+		
+		if(root == null) return 0;
+		
+		int left = getMaxheightOfTree(root.left);
+		int right = getMaxheightOfTree(root.right);
+		
+		return 1 + Math.max(left, right);
 	}
 
 	private Integer searchNearestNode(int target, TreeNode root) {

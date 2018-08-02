@@ -10,14 +10,35 @@ public class ReverseLinkedList {
 		head.next.next.next.next = new ListNode(5);
 		head.next.next.next.next.next = new ListNode(6);
 		
-		ListNode result = reverseList(head);
+//		ListNode result = reverseList(head);
+//		
+//		while(result != null){
+//			System.out.println(result.val);
+//			result = result.next;
+//		}
 		
-		while(result != null){
-			System.out.println(result.val);
-			result = result.next;
+		System.out.println("\n\n");
+		ListNode result1 = reverseListRecursive(head);
+		while(result1 != null){
+			System.out.println(result1.val);
+			result1 = result1.next;
 		}
+		
 	}
 	
+	private static ListNode reverseListRecursive(ListNode head) {
+
+		if(head == null || head.next == null) return head;
+		
+		ListNode second = head.next;
+		head.next = null;
+		
+		ListNode rest = reverseListRecursive(second);
+		second.next = head;
+		
+		return rest;
+	}
+
 	public static ListNode reverseList(ListNode head) {
 		
 		if(head == null || head.next == null)
@@ -27,14 +48,13 @@ public class ReverseLinkedList {
 		ListNode prev = null;
 		ListNode next = null;
 		
+		
 		while(curr != null){
 			next = curr.next;
 			curr.next = prev;
 			prev = curr;
 			curr = next;
-			System.out.println(" 0");
 		}
-		
 		return prev;
 	}
 

@@ -10,6 +10,7 @@ import java.util.Stack;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 
 public class MergeIntervals {
 
@@ -37,25 +38,22 @@ public class MergeIntervals {
 
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
 
-		// Merge Intervals
-		/*
-		 * List<Interval> intervals = new ArrayList<>(); intervals.add(new
-		 * Interval(1, 4)); intervals.add(new Interval(2, 3));
-		 * 
-		 * List<Interval> res = merge(intervals); res.forEach(x -> {
-		 * System.out.println("[" + x.start + " " + x.end + "]"); });
-		 */
-
-		// Check if person can attend all meetings
 		Interval t1 = new Interval(0, 30);
 		Interval t2 = new Interval(5, 10);
 		Interval t3 = new Interval(15, 20);
+		
+		List<Interval> list = new ArrayList<>();
+		list.add(t1);
+		list.add(t2);
+		list.add(t3);
+		
 		Interval[] interval = new Interval[3];
 		interval[0] = t1;
 		interval[1] = t3;
 		interval[2] = t2;
 
-		System.out.println(canAttendMeetings(interval));
+		ObjectMapper mapper = new ObjectMapper();
+		System.out.println(mapper.writeValueAsString(merge(list)));
 
 	}
 
@@ -67,13 +65,7 @@ public class MergeIntervals {
 				return Integer.valueOf(o1.start).compareTo(Integer.valueOf(o2.start));
 			}
 		});
-		
-		
 		System.out.println(Arrays.toString(intervals));
-		
-		
-		
-		
 		return true;
 
 	}

@@ -57,6 +57,7 @@ public class TopologicalSort {
 
 		}
 
+		System.out.println("before "+v);
 		//adding new Integer is important otherwise solutions doesn't work. why?
 		stack.push(new Integer(v));
 

@@ -22,12 +22,13 @@ public class Permutations {
 		
 		for (int i = 0; i < num.length; i++) {
 			ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
-			int size = list.size();
 			System.out.println(new ObjectMapper().writeValueAsString(list));
 			
-			for (int j = 0; j < size; j++) {
+			for (int j = 0; j < list.size(); j++) {
 				ArrayList<Integer> temp = list.get(j);
+				System.out.println();
 				for (int k = 0; k < temp.size() + 1; k++) {
+					System.out.println("k "+k);
 					temp.add(k,num[i]);
 					ArrayList<Integer> t2 = new ArrayList<>(temp);
 					res.add(t2);

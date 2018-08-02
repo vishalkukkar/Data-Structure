@@ -22,7 +22,7 @@ public class LongestPalindromicSubstring {
 			String temp1 = isPalidrome(i, i, s);
 			if (temp1.length() > string.length()) {
 				string = temp1;
-			}
+			} 
 
 			// odd string
 			String temp2 = isPalidrome(i, i + 1, s);

@@ -3,7 +3,6 @@ package com.example.trie;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -12,7 +11,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 public class Trie {
 
 	ObjectMapper mapper = new ObjectMapper();
-	TrieNode root = new TrieNode();
+	
 
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
 
@@ -41,6 +40,7 @@ public class Trie {
 
 	}
 
+	TrieNode root = new TrieNode();
 	private Boolean advanceSearch(String word) {
 
 		TrieNode curr = root;
