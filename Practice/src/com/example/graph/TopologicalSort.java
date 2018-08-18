@@ -28,9 +28,6 @@ public class TopologicalSort {
 		boolean[] visited = new boolean[this.V];
 		Stack<Integer> stack = new Stack<>();
 
-		for (int i = 0; i < V; i++)
-			visited[i] = false;
-
 		// visit all vertices
 		for (int i = 0; i < V; i++) {
 			if (visited[i] == false)

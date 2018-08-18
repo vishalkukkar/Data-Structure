@@ -72,12 +72,10 @@ public class TreeNode {
 
 		ObjectMapper m = new ObjectMapper();
 		TreeNode root = new TreeNode(40);
-		root.insert(30);
-		root.insert(50);
-		root.insert(45);
-		root.insert(55);
-		root.insert(25);
-		root.insert(35);
+		
+		for (int i = 0; i < Integer.MAX_VALUE; i++) {
+			root.insert(i);
+		}
 
 		List<List<Integer>> list = verticalOrder(root);
 		System.out.println(m.writeValueAsString(list));

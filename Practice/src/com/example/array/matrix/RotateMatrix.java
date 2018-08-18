@@ -6,37 +6,50 @@ public class RotateMatrix {
 
 	public static void main(String[] args) {
 
-		int[][] array = { 	{ 1, 2, 3, 4 }, 
-							{ 1, 2, 3, 4 }, 
-							{ 1, 2, 3, 4 }, 
-							{ 1, 2, 3, 4 } };
-		int[][] array1 = { { 1, 2, 3 }, 
-						   { 3, 4, 5 }, 
-						   { 7, 8, 9 } };
-		
-		
-		System.out.println(array[0].length);
+		int[][] array = { { 1, 2, 3 }, { 3, 4, 5 }, { 7, 8, 9 } };
+		int[][] array1 = { { 1, 2, 3 }, { 3, 4, 5 }, { 7, 8, 9 } };
+
+		rotate(array1);
+		rotateImage(array);
 		System.out.println(Arrays.deepToString(array1));
-		rotateMatrix(array1);
+		System.out.println(Arrays.deepToString(array));
+		
+		
 
 	}
 
-	private static void rotateMatrix(int[][] a) {
+	public static void rotate(int[][] matrix) {
+		int n = matrix.length;
+		int layer = n / 2;
 
-		int len = a.length - 1;
-		for (int i = 0; i < a.length / 2; i++) {
-			for (int j = i; j < len - i; j++) {
-
-				int temp = a[i][j];
-				a[i][j] = a[len - j][i];
-				a[len - j][i] = a[len - i] [len - j];
-				a[len - i][len - j] = a[j][len - i];
-				a[j][len - i] = temp;
-
+		for (int i = 0; i < layer; i++) {
+			for (int j = i; j < n - i - 1; j++) {
+				int tmp = matrix[i][j];
+				
+				matrix[i][j] = matrix[n - j - 1][i];
+				matrix[n - j - 1][i] = matrix[n - i - 1][n - j - 1];
+				matrix[n - i - 1][n - j - 1] = matrix[j][n - i - 1];
+				matrix[j][n - i - 1] = tmp;
 			}
 		}
-
-		System.out.println(Arrays.deepToString(a));
 	}
-
+	
+	public static void rotateImage(int[][] matrix){
+		int n = matrix.length;
+		int layer = n / 2;
+		
+		for (int i = 0; i < layer; i++) {
+			for (int j = i; j < n - i - 1; j++) {
+				int tmp = matrix[i][j];
+				
+				matrix[i][j] = matrix[n - j - 1][i];
+				matrix[n - j - 1][i] = matrix[n - i - 1][n - j - 1];
+				matrix[n - i - 1][n - j - 1] = matrix[j][n - i - 1];
+				
+				matrix[j][n - i - 1] = tmp;
+				
+			}
+		}
+		
+	}
 }
