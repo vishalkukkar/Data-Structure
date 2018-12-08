@@ -14,8 +14,10 @@ public class ValidSudoku {
 				{ '.', '.', '.', '4', '1', '9', '.', '.', '5' }, { '.', '.', '.', '.', '8', '.', '.', '7', '9' } };
 
 		System.out.println(isValidSudoku2(sudoku));
+		
+		System.out.println("valid sudoku");
 	}
-
+	
 	private static boolean isValidSudoku2(char[][] board){
 		
 		if (board == null || board.length == 0 || board.length != 9)

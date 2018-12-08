@@ -5,6 +5,27 @@ import java.util.Queue;
 
 public class Soltuion {
 
+	public static class GraphNode {
+
+		GraphNode() {
+		}
+
+		public int value;
+		public Boolean isVisited;
+		public GraphNode[] adjecentList;
+
+		public GraphNode(int i, GraphNode[] adjecentList) {
+			this.value = i;
+			this.adjecentList = adjecentList;
+			this.isVisited = false;
+		}
+
+		public GraphNode(int i) {
+			this.value = i;
+		}
+
+	}
+
 	public static void main(String[] args) {
 
 		GraphNode n1 = new GraphNode(1);
@@ -16,9 +37,8 @@ public class Soltuion {
 
 		n1.adjecentList = new GraphNode[] { n2, n3 };
 		n2.adjecentList = new GraphNode[] { n3, n4 };
-		n3.adjecentList = new GraphNode[] { n4, n5,n2 };
+		n3.adjecentList = new GraphNode[] { n4, n5, n2 };
 		n4.adjecentList = new GraphNode[] { n5, n6 };
-		
 
 		n1.isVisited = false;
 		n2.isVisited = false;
@@ -33,13 +53,13 @@ public class Soltuion {
 
 	private static Boolean searchNode(GraphNode root, GraphNode n6) {
 
-		Queue<GraphNode> q = new LinkedList<GraphNode>();
+		LinkedList<GraphNode> q = new LinkedList<GraphNode>();
 		q.add(root);
 		root.isVisited = true;
 
 		while (q.peek() != null) {
 			GraphNode temp = q.poll();
-			if(temp.adjecentList == null)
+			if (temp.adjecentList == null)
 				continue;
 			for (GraphNode x : temp.adjecentList) {
 				if (!x.isVisited) {
@@ -54,5 +74,7 @@ public class Soltuion {
 
 		return false;
 	}
+	
+	
 
 }

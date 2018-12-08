@@ -72,7 +72,7 @@ public class TreeNode {
 
 		ObjectMapper m = new ObjectMapper();
 		TreeNode root = new TreeNode(40);
-		
+
 		for (int i = 0; i < Integer.MAX_VALUE; i++) {
 			root.insert(i);
 		}
@@ -246,9 +246,7 @@ public class TreeNode {
 					node = node.left;
 				}
 			}
-
 			return val;
-
 		}
 	}
 

@@ -27,10 +27,57 @@ public class FindCelebrity {
 	public static void main(String[] args) {
 
 		int n = 1;
-		System.out.println(findCelebrity(n));
+		
+		Integer p = null;
+		System.out.println(p.intValue());
+
+		System.out.println(strStr("Hello", ""));
 
 	}
+	
 
 	public static int findCelebrity(int n) {
-		return n;}
+		return n;
+	}
+
+	/*
+	 * int String
+	 * 
+	 * strstr(string bigString, string smallerStringToSearch) {
+	 * 
+	 * 
+	 * }
+	 */
+	/*
+	 * public static int strStr(String bigString, String 
+)
+	 * {
+	 * 
+	 * if(smallerStringToSearch == null || smallerStringToSearch.length() == 0)
+	 * return -1;
+	 * 
+	 * for (int i = 0;; i++) { for (int j = 0;; j++) { if (j ==
+	 * smallerStringToSearch.length()) return i; if (i + j ==
+	 * bigString.length()) return -1; if (smallerStringToSearch.charAt(j) !=
+	 * bigString.charAt(i + j)) break; } } }
+	 */
+
+	public static int strStr(String bigString, String smallerStringToSearch) {
+		if (smallerStringToSearch == null || bigString == null)
+			return -1;
+		if (smallerStringToSearch.isEmpty())
+			return 0;
+		for (int i = 0, j = 0; i < bigString.length() && j < smallerStringToSearch.length(); i++) {
+			if (bigString.charAt(i) == smallerStringToSearch.charAt(j))
+				j++;
+			else {
+				i = i - j;
+				j = 0;
+			}
+			if (j == smallerStringToSearch.length())
+				return i - j + 1;
+		}
+		return -1;
+	}
+
 }
