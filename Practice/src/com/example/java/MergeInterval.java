@@ -61,6 +61,14 @@ public class MergeInterval{
 		array[2] = range7;
 		
 		System.out.println(new MergeInterval().merge(array));
+		
+		String anc = " ";
+		String b = null;
+		System.out.println();
+		
+		if(anc.equals(b)){
+			
+		}
 	}
 
 	public int merge(Range[] list) {

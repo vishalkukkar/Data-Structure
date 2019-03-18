@@ -16,7 +16,7 @@ public class DeleteMiddleNode {
 
 		System.out.println(node);
 		while (node != null) {
-			System.out.println(node.val);
+			System.out.println(node.value);
 			node = node.next;
 		}
 	}
@@ -28,12 +28,12 @@ public class DeleteMiddleNode {
 		int count = 0;
 		while (head != null) {
 
-			count = head.val + head2.val;
+			count = head.value + head2.value;
 			System.out.println(count);
 			addition = new ListNode(count % 10 + carry);
 			carry = count / 10;
 			
-			System.out.println(" additon " + addition.val+ "   carry "+carry);
+			System.out.println(" additon " + addition.value+ "   carry "+carry);
 			addition = addition.next;
 			head = head.next;
 			head2 = head2.next;

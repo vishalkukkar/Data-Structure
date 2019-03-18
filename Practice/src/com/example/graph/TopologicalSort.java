@@ -1,75 +1,108 @@
 package com.example.graph;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Stack;
 
-public class TopologicalSort {
+class TopologicalSort {
 
-	int V;
-	LinkedList<Integer> adj[];
+	// An array representing the graph as an adjacency list
+	private final LinkedList<Integer>[] adjacencyList;
 
-	public TopologicalSort(int v) {
-		this.V = v;
-		adj = new LinkedList[v];
-
-		for (int i = 0; i < adj.length; i++) {
-			adj[i] = new LinkedList<Integer>();
+	TopologicalSort(int nVertices) {
+		adjacencyList = new LinkedList[nVertices];
+		for (int vertexIndex = 0; vertexIndex < nVertices; vertexIndex++) {
+			adjacencyList[vertexIndex] = new LinkedList<>();
 		}
 	}
 
-	private void addEdge(int v1, int v2) {
-
-		adj[v1].add(v2);
+	// function to add an edge to graph
+	void addEdge(int startVertex, int endVertex) {
+		adjacencyList[startVertex].add(endVertex);
 	}
 
-	private void topologicalSort() {
+	private int getNoOfVertices() {
+		return adjacencyList.length;
+	}
 
-		boolean[] visited = new boolean[this.V];
+	// A recursive function used by topologicalSort
+	private void topologicalSortUtil(int currentVertex, boolean[] visited, Stack<Integer> stack) {
+		// Mark the current node as visited.
+		visited[currentVertex] = true;
+
+		// Recur for all the vertices adjacent to this vertex
+		for (int adjacentVertex : adjacencyList[currentVertex]) {
+			if (!visited[adjacentVertex]) {
+				topologicalSortUtil(adjacentVertex, visited, stack);
+			}
+		}
+
+		// Push current vertex to stack which stores result
+		stack.push(currentVertex);
+	}
+
+	// prints a Topological Sort of the complete graph
+	void topologicalSort() {
 		Stack<Integer> stack = new Stack<>();
 
-		// visit all vertices
-		for (int i = 0; i < V; i++) {
-			if (visited[i] == false)
-				topologicalSortUtil(i, stack, visited);
+		// Mark all the vertices as not visited
+		boolean[] visited = new boolean[getNoOfVertices()];
+		for (int i = 0; i < getNoOfVertices(); i++) {
+			visited[i] = false;
 		}
 
-		// topological sort print
-		while (!stack.isEmpty())
-			System.out.print(" " + stack.pop());
+		// Call the recursive helper function to store Topological
+		// Sort starting from all vertices one by one
+		for (int i = 0; i < getNoOfVertices(); i++) {
+			if (!visited[i]) {
+				topologicalSortUtil(i, visited, stack);
+			}
+		}
+
+		// Print contents of stack
+		while (!stack.isEmpty()) {
+			System.out.print((char) ('a' + stack.pop()) + " ");
+		}
 	}
+	
+	
+	// This function fidns and prints order
+		// of characer from a sorted array of words.
+		// alpha is number of possible alphabets
+		// starting from 'a'. For simplicity, this
+		// function is written in a way that only
+		// first 'alpha' characters can be there
+		// in words array. For example if alpha
+		// is 7, then words[] should contain words
+		// having only 'a', 'b','c' 'd', 'e', 'f', 'g'
+		private static void printOrder(String[] words, int alpha) {
+			// Create a graph with 'aplha' edges
+			TopologicalSort graph = new TopologicalSort(alpha);
 
-	private void topologicalSortUtil(int v, Stack<Integer> stack, boolean[] visited) {
-
-		int temp = 0;
-		visited[v] = true;
-		Iterator<Integer> i = adj[v].iterator();
-
-		while (i.hasNext()) {
-
-			temp = i.next();
-			if (!visited[temp]) {
-				topologicalSortUtil(temp, stack, visited);
+			for (int i = 0; i < words.length - 1; i++) {
+				// Take the current two words and find the first mismatching
+				// character
+				String word1 = words[i];
+				String word2 = words[i + 1];
+				for (int j = 0; j < Math.min(word1.length(), word2.length()); j++) {
+					// If we find a mismatching character, then add an edge
+					// from character of word1 to that of word2
+					if (word1.charAt(j) != word2.charAt(j)) {
+						graph.addEdge(word1.charAt(j) - 'a', word2.charAt(j) - 'a');
+						break;
+					}
+				}
 			}
 
+			// Print topological sort of the above created graph
+			graph.topologicalSort();
 		}
 
-		System.out.println("before "+v);
-		//adding new Integer is important otherwise solutions doesn't work. why?
-		stack.push(new Integer(v));
-
-	}
-
-	public static void main(String[] args) {
-
-		TopologicalSort g = new TopologicalSort(6);
-		g.addEdge(5, 2);
-		g.addEdge(5, 0);
-		g.addEdge(4, 0);
-		g.addEdge(4, 1);
-		g.addEdge(2, 3);
-		g.addEdge(3, 1);
-		g.topologicalSort();
-	}
-
+		// Driver program to test above functions
+		public static void main(String[] args) {
+			String[] words = { "z", "x", "z" };
+			printOrder(words, 3);
+		}
 }
+
+
+// Contributed by Harikrishnan Rajan

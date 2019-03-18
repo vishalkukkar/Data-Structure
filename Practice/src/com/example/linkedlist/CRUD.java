@@ -24,7 +24,7 @@ public class CRUD {
 		System.out.println("result");
 
 		while (t != null) {
-			System.out.println(t.val);
+			System.out.println(t.value);
 			t = t.next;
 		}
 
@@ -91,15 +91,15 @@ public class CRUD {
 			return null;
 		}
 
-		if (head.val == val)
+		if (head.value == val)
 			return head = head.next;
 
 		ListNode prev = head;
 		ListNode curr = head.next;
 
 		while (prev != null && curr != null) {
-			System.out.println(curr.val);
-			if (curr.val == val) {
+			System.out.println(curr.value);
+			if (curr.value == val) {
 				prev.next = curr.next;
 				return head;
 			} else {

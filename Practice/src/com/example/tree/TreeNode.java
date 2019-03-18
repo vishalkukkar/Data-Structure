@@ -12,6 +12,8 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import com.util.Util;
+
 public class TreeNode {
 
 	TreeNode left;
@@ -70,16 +72,17 @@ public class TreeNode {
 
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
 
-		ObjectMapper m = new ObjectMapper();
-		TreeNode root = new TreeNode(40);
-
-		for (int i = 0; i < Integer.MAX_VALUE; i++) {
-			root.insert(i);
-		}
-
-		List<List<Integer>> list = verticalOrder(root);
-		System.out.println(m.writeValueAsString(list));
-
+		/*
+		 * ObjectMapper m = new ObjectMapper(); TreeNode root = new
+		 * TreeNode(40);
+		 * 
+		 * for (int i = 0; i < Integer.MAX_VALUE; i++) { root.insert(i); }
+		 * 
+		 * // List<List<Integer>> list = verticalOrder(root);
+		 * 
+		 * List<Integer> res = boundaryOfBinaryTree(root);
+		 */
+		// System.out.println(m.writeValueAsString(res));
 		/*
 		 * validateBinaryTree(root);
 		 * 
@@ -92,6 +95,31 @@ public class TreeNode {
 		 * System.out.println(m.writeValueAsString(iterativeInorderTraversal(
 		 * root)));
 		 */
+		
+		
+		int[] array = {1,2,3,4,5,8,10,7};
+		TreeNode root = getMaximumBinaryTree(array);
+		
+	}
+
+	/**
+	 * create a binary tree whose root is max element in array and all other
+	 * elements which are less than max should be on the left side of the root
+	 * and height of the tree should minimum.
+	 * 
+	 */
+
+	private static TreeNode getMaximumBinaryTree(int[] array) {
+		
+		
+		if(array == null || array.length == 0)
+			return null;
+		TreeNode root = new TreeNode(Util.getMax(array));
+		
+		for (int i = 0; i < array.length; i++) {
+			
+		}
+		return null;
 	}
 
 	public static List<List<Integer>> verticalOrder(TreeNode root) {
@@ -411,6 +439,62 @@ public class TreeNode {
 
 		}
 
+	}
+	
+	static List<Integer> res = new ArrayList<>();
+	public static List<Integer> boundaryOfBinaryTree(TreeNode root) {
+		
+		if(root == null)
+			return res;
+		
+		res.add(root.val);
+		leftTree(root.left);
+		leftLeaves(root.left);
+		leftLeaves(root.right);
+		rightTree(root.right);
+		return res;
+		
+	}
+
+	private static void rightTree(TreeNode root) {
+			if(root == null) 
+				return ;
+			
+            if(root.left == null && root.right == null)
+               return;
+               
+			if(root.right == null)
+				leftTree(root.left);
+			else
+				leftTree(root.right);
+        
+            res.add(root.val);
+	}
+    
+
+	private static void leftLeaves(TreeNode root) {
+		
+		if(root == null) return ;
+		if(root.left == null && root.right == null){
+			res.add(root.val);
+            return;
+        }
+		leftLeaves(root.left);
+		leftLeaves(root.right);
+	}
+
+	private static void leftTree(TreeNode root) {
+			
+		if(root == null)
+			return ;
+		
+		res.add(root.val);
+		
+		if(root.left == null)
+			leftTree(root.right);
+		else
+			leftTree(root.left);
+		
 	}
 
 	public static void levelOrderPrintEasy(TreeNode root) {

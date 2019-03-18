@@ -33,7 +33,6 @@ public class Calculator {
 
 	public static void main(String[] args) {
 		
-		StringBuilder sb = new StringBuilder();
 		Calculator calculator = new Calculator();
 		calculator.addition(1,2);
 		calculator.subtraction();

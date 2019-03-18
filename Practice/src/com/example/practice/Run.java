@@ -15,29 +15,42 @@ public class Run {
 	 */
 
 	public static void main(String[] args) {
-		String input = "xxyy";
-		System.out.println(new Run().encrypt(input));
-	}
-
-	public String encrypt(String input) {
-		if (input == null || input.length() == 0)
-			return null;
-
-		return printStar(0, new StringBuilder(), input);
-	}
-
-	private String printStar(int index, StringBuilder sb, String input) {
-
-		if (index == input.length() - 1) {
-			sb.append(input.charAt(index));
-			return sb.toString();
-		} else if (input.charAt(index) == input.charAt(index + 1)) {
-			sb.append(input.charAt(index)).append("*");
-		} else {
-			sb.append(input.charAt(index));
+	
+		String prev = "1/13";
+		String curr = "1/13";
+		
+		StringBuilder sb1 = new StringBuilder();
+		StringBuilder sb2 = new StringBuilder();
+		int index = prev.indexOf("/");
+		for (int i = 0; i < prev.length(); i++) {
+			if(i < index){
+				sb1.append(prev.charAt(i));
+			}else if(i > index){
+				sb2.append(prev.charAt(i));
+			}
 		}
-
-		return printStar(index + 1, sb, input);
+		
+		
+		int x1 = Integer.valueOf(sb1.toString());
+		int y1 = Integer.valueOf(sb2.toString());
+		
+		sb1.setLength(0);
+		sb2.setLength(0);
+		
+		for (int i = 0; i < curr.length(); i++) {
+			if(i < index){
+				sb1.append(curr.charAt(i));
+			}else if(i > index){
+				sb2.append(curr.charAt(i));
+			}
+		}
+		
+		int x2 = Integer.valueOf(sb1.toString());
+		int y2 = Integer.valueOf(sb2.toString());
+		
+		System.out.println((x1 + x2)+"/"+(y1 + y2));
 	}
+
+
 
 }

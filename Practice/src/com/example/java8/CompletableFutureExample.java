@@ -12,7 +12,6 @@ public class CompletableFutureExample {
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 
 		
-		Map<By,String> map = null;
 		
 		List<String> webPageLinks = Arrays.asList("url1","url2","url3");// A list of 100 web page links
 

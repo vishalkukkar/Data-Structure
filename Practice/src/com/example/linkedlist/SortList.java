@@ -49,22 +49,22 @@ public class SortList {
 
 		while (l1 != null && l2 != null) {
 
-			if (l1.val < l2.val) {
-				temp.next = new ListNode(l1.val);
+			if (l1.value < l2.value) {
+				temp.next = new ListNode(l1.value);
 				temp = temp.next;
 				l1 = l1.next;
 			} else {
-				temp.next = new ListNode(l2.val);
+				temp.next = new ListNode(l2.value);
 				temp = temp.next;
 				l2 = l2.next;
 			}
 		}
 
 		if (l1 != null)
-			temp.next = new ListNode(l1.val);
+			temp.next = new ListNode(l1.value);
 
 		if (l2 != null)
-			temp.next = new ListNode(l2.val);
+			temp.next = new ListNode(l2.value);
 
 		return t.next;
 	}
@@ -97,7 +97,7 @@ public class SortList {
 		ListNode l = new ListNode(0), p = l;
 
 		while (l1 != null && l2 != null) {
-			if (l1.val < l2.val) {
+			if (l1.value < l2.value) {
 				p.next = l1;
 				l1 = l1.next;
 			} else {

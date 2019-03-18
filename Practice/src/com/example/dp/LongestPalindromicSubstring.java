@@ -14,23 +14,8 @@ public class LongestPalindromicSubstring {
 	}
 
 	public static String longestPalindrome(String s) {
-
-		String string = s.substring(0, 1);
-		for (int i = 0; i < s.length(); i++) {
-
-			// even string
-			String temp1 = isPalidrome(i, i, s);
-			if (temp1.length() > string.length()) {
-				string = temp1;
-			} 
-
-			// odd string
-			String temp2 = isPalidrome(i, i + 1, s);
-			if (temp2.length() > string.length()) {
-				string = temp2;
-			}
-		}
-		return string;
+		return s;
+		
 	}
 
 	private static String isPalidrome(int i, int j, String s) {

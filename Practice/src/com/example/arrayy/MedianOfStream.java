@@ -6,25 +6,29 @@ import java.util.PriorityQueue;
 //https://leetcode.com/problems/find-median-from-data-stream/
 public class MedianOfStream {
 
-	PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
-	PriorityQueue<Integer> minHeap = new PriorityQueue<>();
 	
+	// 1
+	PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+	PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+	//
 	private void addNumber(int num) {
-
-		maxHeap.offer(num);
-		minHeap.offer(maxHeap.remove());
 		
-		if(maxHeap.size() < minHeap.size()){
-			maxHeap.offer(minHeap.remove());
+		maxHeap.add(num);
+		minHeap.add(maxHeap.poll());
+		
+		if(minHeap.size() > maxHeap.size()){
+			maxHeap.add(minHeap.poll());
 		}
+		
 	}
 
 	private Double getMedian() {
-
-		if(maxHeap.size() == minHeap.size())
-			return Double.valueOf((Double.valueOf(maxHeap.peek() + minHeap.peek())) / 2);
 		
-		return Double.valueOf(maxHeap.peek());
+		if(minHeap.size() > maxHeap.size())
+			 return minHeap.peek().doubleValue();
+		else{
+			return ((minHeap.peek().doubleValue()  + maxHeap.peek().doubleValue()) / 2);
+		}
 	}
 
 	public static void main(String[] args) {

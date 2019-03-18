@@ -40,7 +40,7 @@ public class TestRunner {
 		List<Integer> list = new ArrayList<Integer>();
 		int count = 0;
 		while (temp != null) {
-			list.add(temp.val);
+			list.add(temp.value);
 			temp = temp.next;
 			count++;
 
@@ -52,8 +52,8 @@ public class TestRunner {
 		while (result != null && head != null && count >= 0) {
 			count--;
 			System.out.println("count " + count);
-			System.out.println(list.get(count) + " " + result.val);
-			if (list.get(count) != result.val) {
+			System.out.println(list.get(count) + " " + result.value);
+			if (list.get(count) != result.value) {
 				flag = false;
 				break;
 			}
@@ -81,7 +81,7 @@ public class TestRunner {
 		ListNode result = myClass.reverseList(head);
 		Assert.assertNotNull(result);
 		while (result != null) {
-			assertEquals(result.val, 1);
+			assertEquals(result.value, 1);
 			result = result.next;
 		}
 	}

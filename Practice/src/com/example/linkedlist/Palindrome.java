@@ -21,7 +21,7 @@ public class Palindrome {
 		ListNode reverseList = reverseList(head);
 		
 		while(reverseList != null){
-			if(reverseList.val != t.val)
+			if(reverseList.value != t.value)
 				return false;
 			reverseList = reverseList.next;
 			t = t.next;

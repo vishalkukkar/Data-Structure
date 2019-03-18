@@ -2,14 +2,14 @@ package com.example.linkedlist;
 
 public class ListNode {
 
-	public int val;
+	public int value;
 	public ListNode next;
 
 	ListNode() {
 	}
 	
 	public ListNode(int val) {
-		this.val = val;
+		this.value = val;
 		next = null;
 		
 	}
@@ -20,7 +20,7 @@ public class ListNode {
 		ListNode res = createLinkedList(array);
 		
 		while(res != null){
-			System.out.println(res.val);
+			System.out.println(res.value);
 			res = res.next;
 		}
 		

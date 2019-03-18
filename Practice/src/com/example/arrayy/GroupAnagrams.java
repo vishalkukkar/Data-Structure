@@ -20,14 +20,13 @@ public class GroupAnagrams {
 		System.out.println(mapper.writeValueAsString(groupAnagrams(array)));
 	}
 
-	public static List<List<String>> groupAnagrams(String[] strs) throws JsonGenerationException, JsonMappingException, IOException {
+	public static List<List<String>> groupAnagrams(String[] strs) 
+			throws JsonGenerationException, JsonMappingException, IOException {
 		List<List<String>> result = new ArrayList<List<String>>();
 		 
 	    HashMap<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
 	    for(String str: strs){
 	        char[] arr = new char[26];
-	        ObjectMapper mapper = new ObjectMapper();
-			System.out.println(mapper.writeValueAsString(arr));
 	        for(int i=0; i<str.length(); i++){
 	            arr[str.charAt(i)-'a']++;
 	        }

@@ -33,7 +33,7 @@ public class AddTwoNumbers implements Serializable {
 		ListNode temp = result;
 		while (l1 != null && l2 != null) {
 
-			sum = l1.val + l2.val + carry;
+			sum = l1.value + l2.value + carry;
 
 			temp.next = new ListNode(sum % 10);
 			carry = sum / 10;
@@ -47,7 +47,7 @@ public class AddTwoNumbers implements Serializable {
 		}
 
 		while(l1 != null){
-			int val = l1.val + carry;
+			int val = l1.value + carry;
 			temp.next = new ListNode(val % 10);
 			carry = val / 10;
 			System.out.println(sum+" sum "+"CARRY "+carry);
@@ -56,7 +56,7 @@ public class AddTwoNumbers implements Serializable {
 		}
 		
 		while(l2 != null){
-			int val = l2.val + carry;
+			int val = l2.value + carry;
 			temp.next = new ListNode(val % 10);
 			carry = val / 10;
 			System.out.println(sum+" sum "+"CARRY "+carry);

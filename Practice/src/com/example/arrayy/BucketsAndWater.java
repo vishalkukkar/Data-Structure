@@ -4,11 +4,11 @@ public class BucketsAndWater {
 
 	public static void main(String[] args) {
 		
-		System.out.println(calc(20, 6, 5, 5));
+		System.out.println(calc(24, 4, 6));
 
 	}
 
-	public static float calc(int waterQuantity, int numOfCup, int cupSize, int nthCup) {
+	public static float calc(int waterQuantity, int cupSize, int nthCup) {
 		float[] m = new float[nthCup];
 		m[0] = waterQuantity;
 

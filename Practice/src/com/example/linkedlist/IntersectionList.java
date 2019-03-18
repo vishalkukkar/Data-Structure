@@ -18,7 +18,7 @@ public class IntersectionList {
 
 
 		head = isIntersection(head, head2);
-		System.out.println(head.val);
+		System.out.println(head.value);
 		
 	}
 
@@ -48,7 +48,7 @@ public class IntersectionList {
 			return null;
 
 		while (temp1 != null && temp2 != null) {
-			if (temp1.val == temp2.val)
+			if (temp1.value == temp2.value)
 				return temp1;
 			temp1 = temp1.next;
 			temp2 = temp2.next;

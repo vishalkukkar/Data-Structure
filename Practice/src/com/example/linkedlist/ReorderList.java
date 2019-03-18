@@ -15,7 +15,7 @@ public class ReorderList {
 
 		ListNode res = reorderList(head);
 		while (res != null) {
-			System.out.print(res.val + " --> ");
+			System.out.print(res.value + " --> ");
 			res = res.next;
 		}
 	}
@@ -41,9 +41,9 @@ public class ReorderList {
 		ListNode res = result;
 		while (size > 0 && temp != null) {
 
-			result.next = new ListNode(temp.val);
+			result.next = new ListNode(temp.value);
 			result = result.next;
-			result.next = new ListNode(stack.pop().val);
+			result.next = new ListNode(stack.pop().value);
 			result = result.next;
 
 			temp = temp.next;
@@ -51,7 +51,7 @@ public class ReorderList {
 		}
 
 		if (stack.size() % 2 != 0)
-			result.next = new ListNode(temp.val);
+			result.next = new ListNode(temp.value);
 		return res.next;
 	}
 }

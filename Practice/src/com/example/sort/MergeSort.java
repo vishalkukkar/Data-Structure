@@ -9,6 +9,9 @@ public class MergeSort {
 		int[] array = { 2, 4, 2, 6, 7, 11, 10, 5 };
 		mergeSort(array);
 		System.out.println("Sorted Array " + Arrays.toString(array));
+		
+		
+		System.out.println("abcd".substring(0,2));
 	}
 
 	private static void mergeSort(int[] array) {

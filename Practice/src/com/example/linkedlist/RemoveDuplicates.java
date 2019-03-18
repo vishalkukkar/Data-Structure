@@ -15,7 +15,7 @@ public class RemoveDuplicates {
 		ListNode node = removeDuplicates(head);
 
 		while (node != null) {
-			System.out.println(node.val);
+			System.out.println(node.value);
 			node = node.next;
 		}
 
@@ -31,10 +31,10 @@ public class RemoveDuplicates {
 
 		while (head != null) {
 
-			if (set.contains(head.val)) {
+			if (set.contains(head.value)) {
 				previous.next = head.next;
 			} else {
-				set.add(head.val);
+				set.add(head.value);
 				previous = previous.next;
 			}
 

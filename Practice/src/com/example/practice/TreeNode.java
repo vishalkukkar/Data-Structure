@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import com.util.Util;
+
 public class TreeNode {
 
 	TreeNode left;
@@ -68,6 +70,7 @@ public class TreeNode {
 	public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
 
 		preOrder(root);
+		return res;
 	}
 
 	public void preOrder(TreeNode root) {
@@ -85,12 +88,14 @@ public class TreeNode {
 
 	public String serialize(TreeNode root, StringBuilder sb) {
 		if (root == null)
-			 sb.append("# ");
-		sb.append(root.val + " ");
-		serialize(root.left, sb);
-		serialize(root.right, sb);
+			sb.append("# ");
+		else{
+			sb.append(root.val + " ");
+			serialize(root.left, sb);
+			serialize(root.right, sb);
+		}
 
-		return sb.toString().hashCode();
+		return sb.toString();
 	}
 
 	public static void main(String[] args) {
@@ -105,18 +110,19 @@ public class TreeNode {
 		 * 
 		 * System.out.println(map.get(s1)); System.out.println(map.get(s2));
 		 */
-		
+
 		String s = new String();
-		s.hashCode()
 
-		TreeNode n = new TreeNode(50);
-		n.insert(20);
-		n.insert(60);
-		n.insert(10);
-		n.insert(70);
-		n.insert(30);
-		n.insert(80);
+		TreeNode n = new TreeNode(1);
+		n.insert(4);
+		n.insert(3);
+		n.insert(5);
+		/*
+		 * n.insert(70); n.insert(30); n.insert(80);
+		 */
 
+		/*List<Integer> res = n.boundaryOfBinaryTree(n);
+		System.out.println(Util.print(res));*/
 		// n.levelOrderNoExtraMemory(n);
 
 		/*
@@ -132,12 +138,55 @@ public class TreeNode {
 		// n.postTraversalIterative(n);
 		// n.zigZagOrder(n);
 
-		String ser = n.serialize(n);
-		System.out.println(ser);
-		TreeNode node = n.deserialize(ser);
 		
-		n.levelOrderNoExtraMemory(node);
+		  String ser = n.serialize(n); 
+		  System.out.println(ser); 
+		  TreeNode node = n.deserialize(ser);
+		 
+		  n.levelOrderNoExtraMemory(node);
+		 
 	}
+
+	/*public static List<Integer> boundaryOfBinaryTree(TreeNode root) {
+
+		List<Integer> right = new ArrayList<>();
+		LinkedList<Integer> left = new LinkedList<>();
+		if (root == null)
+			return right;
+
+		LinkedList<TreeNode> queue = new LinkedList<>();
+		queue.add(root);
+		while (!queue.isEmpty()) {
+			int size = queue.size();
+			System.out.println();
+			for (int i = 0; i < size; i++) {
+				TreeNode t = queue.remove();
+				if (i == 0) {
+					left.add(t.val);
+				}
+
+				if (i != 0 && i != size - 1 && t.left == null && t.right == null) {
+					left.add(t.val);
+				}
+
+				if (i != 0 && i == size - 1) {
+					right.add(0, t.val);
+				}
+
+				if (t.left != null) {
+					queue.add(t.left);
+				}
+				if (t.right != null) {
+					queue.add(t.right);
+				}
+
+			}
+		}
+
+		left.addAll(right);
+		return left;
+
+	}*/
 
 	// Encodes a tree to a single string.
 	public String serialize(TreeNode root) {
@@ -145,17 +194,13 @@ public class TreeNode {
 		return serialize(root, new StringBuilder());
 	}
 
-	private String serialize(TreeNode root, StringBuilder sb) {
-
-		if (root == null)
-			sb.append("# ");
-		else {
-			sb.append(root.val + " ");
-			serialize(root.left, sb);
-			serialize(root.right, sb);
-		}
-		return sb.toString().trim();
-	}
+	/*
+	 * private String serialize(TreeNode root, StringBuilder sb) {
+	 * 
+	 * if (root == null) sb.append("# "); else { sb.append(root.val + " ");
+	 * serialize(root.left, sb); serialize(root.right, sb); } return
+	 * sb.toString().trim(); }
+	 */
 
 	// Decodes your encoded data to tree.
 	public TreeNode deserialize(String data) {
@@ -302,5 +347,73 @@ public class TreeNode {
 		}
 
 	}
+
+	public List<Integer> boundaryOfBinaryTree(TreeNode root) {
+
+		List<Integer> res = new ArrayList<>();
+
+		if (root == null)
+			return res;
+		res.add(root.val);
+		leftTree(root.left, res);
+		leaf(root, res);
+		rightTree(root.right, res);
+
+		return res;
+
+	}
+
+	public void leaf(TreeNode root,List<Integer> res){
+        
+        if(root != null){
+            
+            if(root.left == null && root.right == null)
+                res.add(root.val);
+            leaf(root.left,res);
+            leaf(root.right,res);
+        }
+            
+    }
+
+	public void leftTree(TreeNode root,List<Integer> res){
+        
+		if(root == null)
+			return;
+		
+        if(root.left != null){
+            
+            if(root.left.left != null && root.left.right != null){
+                res.add(root.left.val);
+                leftTree(root.left.left,res);
+            }
+        }else if(root.right != null){
+            
+            if(root.right.left != null && right.right != null){
+               res.add(right.val);
+               leftTree(right.left,res);
+            }
+        }
+    }
+
+	public void rightTree(TreeNode root,List<Integer> res){
+        
+		if(root == null)
+			return;
+		
+          if(root.right != null){
+              
+              if(root.right.left != null && root.right.right != null){
+                  res.add(root.right.val);
+                  rightTree(root.right.right,res);
+                }
+        }
+        else if(root.left != null){
+            
+             if(root.left.left != null && root.left.right != null){
+                    res.add(root.left.val);
+                    rightTree(root.left.right,res);
+            }
+        }
+    }
 
 }

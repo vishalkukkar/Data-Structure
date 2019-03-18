@@ -5,15 +5,38 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import com.util.Util;
+
 public class EmployeeManageRelationship {
 
 	static Map<String, Integer> result = new HashMap<String, Integer>();
 
+	/***
+	 * 
+	 * @param args
+	 * @throws JsonGenerationException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 * 
+	 *  In this example C is manager of A, 
+		C is also manager of B, F is manager 
+		of C and so on.
+
+
+A - 0  
+B - 0
+C - 2
+D - 0
+E - 1
+F - 5 
+
+	 */
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
 
 		Map<String, String> dataSet = new HashMap<String, String>();
@@ -24,10 +47,90 @@ public class EmployeeManageRelationship {
 		dataSet.put("E", "F");
 		dataSet.put("F", "F");
 
-		populateResult(dataSet);
-		System.out.println("result = " + result);
+		//populateResult(dataSet);
+		calculate(dataSet);
+	//	System.out.println("result = " + result);
 
 	}
+	
+
+	private static void calculate(Map<String, String> dataSet) {
+		
+		Map<String,List<String>> map = new HashMap<>();
+		Map<String,Integer> res = new HashMap<>();
+		
+		for(Map.Entry<String, String> entry : dataSet.entrySet()){
+			
+			
+			if(entry.getKey().equals(entry.getValue()))
+				continue;
+			if(!map.containsKey(entry.getValue()))
+				map.put(entry.getValue(), new ArrayList<>());
+			map.get(entry.getValue()).add(entry.getKey());
+		}
+		
+		Set<String> set = dataSet.keySet();
+		
+		for(String s : set){
+			getCount(s,res,map);
+		}
+		System.out.println(Util.print(res));
+	}
+
+
+
+	private static int getCount(String key, Map<String, Integer> res, Map<String, List<String>> map) {
+		
+		
+		
+		List<String> list = map.get(key);
+		
+		if(list == null || list.size() == 0){
+			res.put(key, 0);
+			return 0;
+			
+		}
+		
+		int count = list.size();
+		for(String s : list){
+			
+			if(res.get(s) != null){
+				count += res.get(s);
+			}else{
+				count+= getCount(key, res, map);
+			}
+			res.put(key, count);
+		}
+		
+		
+		return count;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	private static void populateResult(Map<String, String> dataSet)
 			throws JsonGenerationException, JsonMappingException, IOException {

@@ -21,23 +21,37 @@ public class PowOfX {
 	public static void main(String[] args) {
 
 		double x = 2.00000;
-		int n = -2;
+		int n = 5;
 		System.out.println(myPow(x, n));
 	}
 
 	public static double myPow(double x, int n) {
-
-		if (n < 0) {
-			x = 1 / x;
-			n = -n;
-		}
-
-		double ans = 1;
-		for (int i = 0; i < n; i++) {
-			ans *= x;
-		}
-		return ans;
-
+		if (n < 0)
+			return 1 / power(x, -n);
+		return power(x, n);
 	}
+
+	static double power(double x, int n) {
+
+		if (n == 0)
+			return 1;
+		double half = power(x, n / 2);
+		System.out.println(half +"   "+n);
+		if (n % 2 == 0){
+			
+			return half * half;
+		}
+		return x * half * half;
+	}
+
+	/*
+	 * public static double myPow(double x, int n) {
+	 * 
+	 * if (n < 0) { x = 1 / x; n = -n; }
+	 * 
+	 * double ans = 1; for (int i = 0; i < n; i++) { ans *= x; } return ans;
+	 * 
+	 * }
+	 */
 
 }

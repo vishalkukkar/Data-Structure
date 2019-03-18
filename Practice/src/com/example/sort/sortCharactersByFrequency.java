@@ -38,6 +38,7 @@ public class sortCharactersByFrequency {
 			}
 		});
 		
+		
 		for (Map.Entry<Character,Integer> entry : list) {
 			if(entry.getValue() > 1){
 				for (int i = 0; i < entry.getValue(); i++) {

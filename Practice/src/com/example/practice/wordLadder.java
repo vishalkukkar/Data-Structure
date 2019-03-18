@@ -2,7 +2,7 @@ package com.example.practice;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 /***
@@ -26,42 +26,53 @@ public class wordLadder {
 	}
 
 	public static int ladderLength(String beginWord, String endWord, Set<String> wordList) {
+		Set<String> set = new HashSet<>(wordList);
 
-		LinkedList<String> queue = new LinkedList<>();
-		wordList.add(endWord);
-		queue.add(beginWord);
-		int count = 1;
-		while (!queue.isEmpty()) {
+		return ladderlen(beginWord.toCharArray(), endWord.toCharArray(), set, 0);
 
-			String curr = queue.remove();
-			if (curr.equals(endWord))
-				return count;
+	}
 
-			char[] array = curr.toCharArray();
+	public static int ladderlen(char[] beginWord, char[] endWord, Set<String> set, int count) {
 
-			for (int i = 0; i < array.length; i++) {
-				char temp = array[i];
-				for (char j = 'a'; j < 'z'; j++) {
+		if (isEqual(beginWord, endWord))
+			return count;
 
-					if (j != temp) {
-						array[i] = j;
-					}
+		for (int i = 0; i < beginWord.length; i++) {
 
-					String str = new String(array);
-					if (wordList.contains(str)) {
-						queue.offer(str);
-						wordList.remove(str);
-					}
-				}
+			if (beginWord[i] == endWord[i])
+				continue;
 
-				array[i] = temp;
+			char temp = beginWord[i];
+			beginWord[i] = endWord[i];
+
+			String s = getString(beginWord);			
+			if (set.contains(s)) {
+				count++;
+				break;
+			} else {
+				beginWord[i] = temp;
 			}
-			
-			count = count + 1;
-
 		}
-		return 0;
 
+		return ladderlen(beginWord, endWord, set, count);
+	}
+
+	private static String getString(char[] beginWord) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < beginWord.length; i++) {
+			sb.append(beginWord[i]);
+		}
+		return sb.toString();
+	}
+
+	public static boolean isEqual(char[] beginWord, char[] endWord) {
+
+		for (int i = 0; i < beginWord.length; i++) {
+			if (beginWord[i] != endWord[i])
+				return false;
+		}
+
+		return true;
 	}
 
 }

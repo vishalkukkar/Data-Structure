@@ -1,12 +1,10 @@
 package com.example.strings;
 
-import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
-
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
+import java.util.Set;
 
 /***
  * 
@@ -48,23 +46,61 @@ import org.codehaus.jackson.map.ObjectMapper;
 public class MostCommonWord {
 
 	public static void main(String[] args) {
-		String[] array = { "hit" };
-		System.out.println(mostCommonWord("Bob hit a ball, the hit BALL flew far after it was hit.", array));
-
+		String[] array = { "a" };
+		System.out.println(mostCommonWord("a, a, a, a, b,b,b,c, c", array));
 	}
 
 	public static String mostCommonWord(String paragraph, String[] banned) {
 
-		Map<String,Integer> words = new HashMap<>();
-		String res = null;
-		String[] input = paragraph.toLowerCase().split("[',.?!;]* ");
-		
-		for(String word : input)  words.put(word, words.getOrDefault(word, 0) + 1);
-		for(String b : banned) words.remove(b);
-		for(String word : words.keySet())
-			if(res == null || words.get(word) > words.get(res))
-				res = word;
-		return res;
+		if (paragraph == null || paragraph.length() == 0)
+			return null;
 
+		String word = null;
+		int max = 0;
+		String[] array = paragraph.trim().toLowerCase().split("\\W+");
+		
+		System.out.println(Arrays.toString(array));
+		Set<String> set = new HashSet<>();
+		Map<String, Integer> map = new HashMap<>();
+
+		for (String s : banned)
+			set.add(s);
+
+		for (String s : array) {
+
+			if (set.contains(s))
+				continue;
+
+			if (map.containsKey(s)) {
+				int val = map.get(s) + 1;
+
+				if (val > max) {
+					max = val;
+					word = s;
+				}
+
+			} else {
+
+				map.put(s, 0);
+
+				if (max == 0)
+					word = s;
+			}
+		}
+
+		return word;
 	}
+	/*
+	 * public static String mostCommonWord(String paragraph, String[] banned) {
+	 * 
+	 * Map<String,Integer> words = new HashMap<>(); String res = null; String[]
+	 * input = paragraph.toLowerCase().split("[',.?!;]* ");
+	 * 
+	 * for(String word : input) words.put(word, words.getOrDefault(word, 0) +
+	 * 1); for(String b : banned) words.remove(b); for(String word :
+	 * words.keySet()) if(res == null || words.get(word) > words.get(res)) res =
+	 * word; return res;
+	 * 
+	 * }
+	 */
 }

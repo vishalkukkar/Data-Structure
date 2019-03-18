@@ -5,7 +5,7 @@ public class IntegerToEnglishWords {
 	public static void main(String[] args) {
 
 		int number = 1234;
-		System.out.println(new IntegerToEnglishWords().numberToWords(1));
+		System.out.println(new IntegerToEnglishWords().numberToWords(49));
 
 	}
 
@@ -29,8 +29,10 @@ public class IntegerToEnglishWords {
 			sb.append(num / 1000).append(" Thousand ").append(numberToWords(num % 1000));
 		else if(num >= 100)
 			sb.append(num / 100).append(" Hundred ").append(numberToWords(num % 100));
-		else if(num >= 20)
+		else if(num >= 20){
+			System.out.println((num - 20) / 10 + 20);
 			sb.append(words[(num - 20) / 10 + 20]).append(" ").append(numberToWords(num % 10));
+		}
 		else
 			sb.append(words[num]);
 

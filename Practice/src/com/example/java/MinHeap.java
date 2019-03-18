@@ -80,7 +80,6 @@ public class MinHeap {
 	private void remove() {
 
 		if (size != 0) {
-			System.out.println(size);
 			array[0] = array[size - 1];
 			array[size - 1] = 0;
 			size--;

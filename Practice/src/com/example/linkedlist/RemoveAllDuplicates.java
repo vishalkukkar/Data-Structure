@@ -16,7 +16,7 @@ public class RemoveAllDuplicates {
 
 		ListNode node = deleteDuplicates(head);
 		while (node != null) {
-			System.out.println(node.val);
+			System.out.println(node.value);
 			node = node.next;
 		}
 	}
@@ -32,9 +32,9 @@ public class RemoveAllDuplicates {
 
 		while (curr.next != null && curr.next.next != null) {
 
-			if (curr.next.val == curr.next.next.val) {
-				int dup = curr.next.val;
-				while (curr.next != null && curr.next.val == dup) {
+			if (curr.next.value == curr.next.next.value) {
+				int dup = curr.next.value;
+				while (curr.next != null && curr.next.value == dup) {
 					curr.next = curr.next.next;
 				}
 			} else {
