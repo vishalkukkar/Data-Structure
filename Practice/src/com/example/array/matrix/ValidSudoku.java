@@ -23,24 +23,57 @@ public class ValidSudoku {
 		if (board == null || board.length == 0 || board.length != 9)
 			return false;
 		
+		
 		for (int i = 0; i < board.length; i++) {
 			
-			Set<Integer> rows = new HashSet<>();
-			Set<Integer> column = new HashSet<>();
-			Set<Integer> cube = new HashSet<>();
+			boolean row[] = new boolean[9];
+			boolean col[] = new boolean[9];
+			boolean box[] = new boolean[9];
 			
-			for (int j = 0; j < board.length; j++) {
+			
+			for (int j = 0; j < board[0].length; j++) {
 				
-				if(board[i][j] != '.' && !rows.add((int) board[i][j] - '1')) return false;
-				if(board[j][i] != '.' && !column.add((int) board[j][i] - '1')) return false;
+				//row
+				if(board[i][j] == '.' || board[j][i] == '.') 
+					continue;
+			
+				int ch1 = board[i][j] - '1';
+				if(row[ch1]){
+					return false;
+				}else{
+					row[ch1] = true;
+				}
 				
-				int row = (i / 3 * 3) + j / 3;
-				int col =  (i % 3 * 3) + j % 3;
-				if(board[row][col] != '.' && !cube.add((int) board[row][col] - '1')) return false;
+				//column
+				int ch2 = board[j][i] - '1';;
+				if(col[ch2]){
+					return false;
+				}else{
+					col[ch2] = true;
+				}
+				
+				//box
+				
+				int x = 3 * (i / 3) + (j / 3);
+				int y = 3 * (i % 3) + (j % 3);
+				
+				if(board[x][y] == '.')
+					continue;
+				
+				//column
+				int ch3 = board[x][y] - '1';
+				if(box[ch3]){
+					return false;
+				}else{
+					box[ch3] = true;
+				}
+				
+				
 				
 			}
+			
 		}
-		return false;
+		return true;
 	}
 
 	private static boolean isValid(char[][] board) {

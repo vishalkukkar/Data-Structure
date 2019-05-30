@@ -30,15 +30,19 @@ public class WordBreak {
 				for (String word : wordDict) {
 
 					int currIndex = i + word.length();
+					
+					
 					if (currIndex > s.length())
 						continue;
-
+			
 					if (s.substring(i, currIndex).equals(word)) {
 						flag[currIndex] = true;
+						System.out.println(currIndex);
 					}
 				}
 			}
 		}
+		System.out.println(Arrays.toString(flag));
 
 		return flag[s.length()];
 

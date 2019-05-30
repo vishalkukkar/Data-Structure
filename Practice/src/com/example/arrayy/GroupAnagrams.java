@@ -18,6 +18,7 @@ public class GroupAnagrams {
 		//String[] array2 = {"duh","ill"};
 		ObjectMapper mapper = new ObjectMapper();
 		System.out.println(mapper.writeValueAsString(groupAnagrams(array)));
+		
 	}
 
 	public static List<List<String>> groupAnagrams(String[] strs) 
@@ -30,7 +31,7 @@ public class GroupAnagrams {
 	        for(int i=0; i<str.length(); i++){
 	            arr[str.charAt(i)-'a']++;
 	        }
-	        
+	        System.out.println(Arrays.toString(arr));
 	        String ns = new String(arr);
 	        if(map.containsKey(ns)){
 	            map.get(ns).add(str);

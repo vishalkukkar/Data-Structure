@@ -1,87 +1,69 @@
 package com.example.graph;
 
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
-/****
- * 
- * @author vkukkar
- *
- *         There are a total of n courses you have to take, labeled from 0 to n
- *         - 1. Some courses may have prerequisites, for example to take course
- *         0 you have to first take course 1, which is expressed as a pair:
- *         [0,1]. Given the total number of courses and a list of prerequisite
- *         pairs, is it possible for you to finish all courses?
- * 
- *         For example, given 2 and [[1,0]], there are a total of 2 courses to
- *         take. To take course 1 you should have finished course 0. So it is
- *         possible. For another example, given 2 and [[1,0],[0,1]], there are a
- *         total of 2 courses to take. To take course 1 you should have finished
- *         course 0, and to take course 0 you should also have finished course
- *         1. So it is impossible.
- * 
- *         Analysis This problem can be converted to finding if a graph contains
- *         a cycle.
- * 
- * 
- */
 public class CourseSchedule {
 
 	public static void main(String[] args) {
 
-		int[][] array = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 4 }, { 2, 5 } };
+		int[][] array = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 4 }, { 4, 0 } };
 		System.out.println(new CourseSchedule().canFinish(6, array));
-		// for example to take course 0 you have to first take course 1, 
-		//which is expressed as a pair: [0,1]
+		// for example to take course 0 you have to first take course 1,
+		// which is expressed as a pair: [0,1]
+		
+		
+	}
+
+	static class Course {
+		private boolean vis;
+		private boolean done;
+		private ArrayList<Course> pre = new ArrayList<Course>();
+
+		void addPre(Course preCourse) {
+			pre.add(preCourse);
+		}
+
+		boolean isCyclic() {
+//			if (done) {
+//				return false;
+//			}
+			if (vis) {
+				return true;
+			}
+			vis = true;
+
+			for (Course preCourse : pre) {
+				if (preCourse.isCyclic()) {
+					return true;
+				}
+			}
+
+			vis = false;
+			//done = true;
+			return false;
+		}
 	}
 
 	public boolean canFinish(int numCourses, int[][] prerequisites) {
-		if (prerequisites == null) {
-			throw new IllegalArgumentException("illegal prerequisites array");
-		}
+		Course clist[] = new Course[numCourses];
 
-		int len = prerequisites.length;
-
-		if (numCourses == 0 || len == 0) {
-			return true;
-		}
-
-		// counter for number of prerequisites
-		int[] pCounter = new int[numCourses];
-		for (int i = 0; i < len; i++) {
-			pCounter[prerequisites[i][0]]++;
-		}
-		
-		System.out.println(Arrays.toString(pCounter));
-
-		// store courses that have no prerequisites
-		LinkedList<Integer> queue = new LinkedList<Integer>();
 		for (int i = 0; i < numCourses; i++) {
-			if (pCounter[i] == 0) {
-				queue.add(i);
+			clist[i] = new Course();
+		}
+
+		for (int[] couple : prerequisites) {
+			Course c1 = clist[couple[0]];
+			Course c2 = clist[couple[1]];
+			c1.addPre(c2);
+		}
+
+		for (int i = 0; i < numCourses; i++) {
+			if (clist[i].isCyclic()) {
+				return false;
 			}
 		}
 
-		// number of courses that have no prerequisites
-		int numNoPre = queue.size();
-
-		// queue 
-		while (!queue.isEmpty()) {
-			int top = queue.remove();
-			for (int i = 0; i < len; i++) {
-				// if a course's prerequisite can be satisfied by a course in
-				// queue
-				if (prerequisites[i][1] == top) {
-					pCounter[prerequisites[i][0]]--;
-					if (pCounter[prerequisites[i][0]] == 0) {
-						numNoPre++;
-						queue.add(prerequisites[i][0]);
-					}
-				}
-			}
-		}
-
-		return numNoPre == numCourses;
+		return true;
 	}
 
 }

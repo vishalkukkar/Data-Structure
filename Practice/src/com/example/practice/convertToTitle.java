@@ -16,6 +16,7 @@ public class convertToTitle {
 			n--;
 
 			sb.append((char) ('A' + n % 26));
+			System.out.println(2);
 			n /= 26;
 
 		}

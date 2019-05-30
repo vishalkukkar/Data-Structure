@@ -24,7 +24,7 @@ public class BasicCalculatorIII {
 		String s3 = "2*(5+5*2)/3+(6/2+8)";
 		String s4 = "(2+6* 3+5-(3*14/7+2)*5)+3";
 
-		//System.out.println(calculate("6 - 4 / 2"));
+		// System.out.println(calculate("6 - 4 / 2"));
 
 		System.out.println(calculate(s1));
 		System.out.println(calculate(s2));
@@ -39,10 +39,13 @@ public class BasicCalculatorIII {
 		Queue<Character> queue = new LinkedList<>();
 
 		for (char c : s.toCharArray()) {
-			if (c != ' ')
-				queue.add(c);
+			if (c == ' ')
+				continue;
+			queue.add(c);
 		}
+
 		queue.add('+');
+
 		return calc(queue);
 	}
 
@@ -51,39 +54,40 @@ public class BasicCalculatorIII {
 		char sign = '+';
 		Stack<Integer> stack = new Stack<>();
 		int num = 0;
-
 		while (!queue.isEmpty()) {
 
-			char c = queue.remove();
-			if (Character.isDigit(c)) {
-				num = num * 10 + c - '0';
-			} else if (c == '(') {
+			char ch = queue.remove();
+
+			if (Character.isDigit(ch)) {
+				num = num * 10 + (ch - '0');
+			} else if (ch == '(') {
 				num = calc(queue);
 			} else {
 
-				if (sign == '+') {
+				if (sign == '+')
 					stack.push(num);
-				} else if (sign == '-') {
+				else if (sign == '-')
 					stack.push(-num);
-				} else if (sign == '*') {
+				else if(sign == '*')
 					stack.push(stack.pop() * num);
-				} else if (sign == '/') {
+				else if(sign == '/')
 					stack.push(stack.pop() / num);
-				}
-
-				sign = c;
+				
+				
 				num = 0;
-
-				if (c == ')')
+				sign = ch;
+				
+				if(ch == ')')
 					break;
+
 			}
 		}
-
+		
 		int sum = 0;
-		while (!stack.isEmpty()) {
+		while(!stack.isEmpty())
 			sum += stack.pop();
-		}
 		return sum;
+
 	}
 
 }

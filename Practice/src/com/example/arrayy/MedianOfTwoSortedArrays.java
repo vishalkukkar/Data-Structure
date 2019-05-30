@@ -12,33 +12,47 @@ public class MedianOfTwoSortedArrays {
 	}
 
 	public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-		return findMedian(nums1,0,nums1.length - 1,nums2,0,nums2.length - 1);
+		
+		
+		if(nums1.length > nums2.length) return findMedianSortedArrays(nums2, nums1);
+		
+		
+		int x = nums1.length;
+		int y = nums2.length;
+		
+		int low = 0;
+		int high = x;
+		
+		
+		while(low <= high){
+			
+			int partitionX = (low + high) / 2;
+			int patitionY = (x + y + 1) / 2 - partitionX;
+			
+			int maxLeftX = partitionX == 0 ? Integer.MIN_VALUE : nums1[partitionX - 1] ;
+			int minRightX = partitionX == x ? Integer.MAX_VALUE : nums1[partitionX];
+			int maxLeftY = patitionY == 0 ? Integer.MIN_VALUE : nums2[patitionY - 1] ;
+			int minRightY =  patitionY == y ? Integer.MAX_VALUE : nums2[patitionY];
+			
+			if(maxLeftX <= minRightY && maxLeftY <= minRightX){
+				
+				if((x + y) % 2 == 0){
+					return (double) (Math.max(maxLeftX, maxLeftY) + Math.min(minRightX, minRightY)) / 2; 
+				}
+				
+				return Math.max(maxLeftY, maxLeftX);
+			}else if(maxLeftX > minRightY){
+				high = partitionX - 1;
+			}else{
+				low = partitionX + 1;
+			}
+				
+			
+		}
+		
+		return -1;
+		
 	}
 
-	private double findMedian(int[] nums1, int start_a, int end_a, int[] nums2, int start_b, int end_b) {
-		
-		if((end_a - start_a) == 1 && (end_b - start_b) == 1){
-			return (Math.max(nums1[start_a],nums2[start_b]) + Math.min(nums1[end_a], nums2[end_b])) / 2;
-		}
-		
-		
-		int m1_index = (start_a + end_a) / 2;
-		int m2_index = (start_b + end_b)/2;
-		
-		int m1 = nums1[m1_index];
-		int m2 = nums2[m2_index];
-		
-		if(m1 == m2)
-			return m1;
-		else if(m1 < m2){
-			start_a = m1_index;
-			end_b = m2_index;
-		}else{
-			start_b = m2_index;
-			end_a = m1_index;
-		}
-		
-		return findMedian(nums1, start_a, end_a, nums2, start_b, end_b);
-	}
 
 }

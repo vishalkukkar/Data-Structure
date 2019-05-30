@@ -51,6 +51,31 @@ public class MeetingRooms {
 		System.out.println(canAttendMeetings(interval));
 
 	}
+	
+	 public int minMeetingRooms(Interval[] intervals) {
+	        
+		 if (intervals == null)
+				return 0;
+
+		if (intervals.length == 0 || intervals.length == 1)
+			return intervals.length;
+		
+		PriorityQueue<Integer> queue = new PriorityQueue<>();
+		Arrays.sort(intervals,(a, b) -> a.start - b.start);
+		
+		queue.add(intervals[0].end);
+		
+		for (int i = 1; i < intervals.length; i++) {
+			
+			if(intervals[i].start >= queue.peek()){
+				queue.poll();
+			}
+			queue.add(intervals[i].end);
+		}
+		
+		return queue.size();
+	        
+	   }
 
 	private static int canAttendMeetings(Interval[] intervals) {
 

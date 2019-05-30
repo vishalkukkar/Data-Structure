@@ -1,56 +1,45 @@
 package com.example.practice;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Run {
 
-	/**
-	 * 
-	 * @param args
-	 *            Given a string, compute recursively a new string where
-	 *            identical chars that are adjacent in the original string are
-	 *            separated from each other by a "*".
-	 * 
-	 * 
-	 *            pairStar("hello") → "hel*lo" pairStar("xxyy") → "x*xy*y"
-	 *            pairStar("aaaa") → "a*a*a*a"
-	 */
-
 	public static void main(String[] args) {
-	
-		String prev = "1/13";
-		String curr = "1/13";
-		
-		StringBuilder sb1 = new StringBuilder();
-		StringBuilder sb2 = new StringBuilder();
-		int index = prev.indexOf("/");
-		for (int i = 0; i < prev.length(); i++) {
-			if(i < index){
-				sb1.append(prev.charAt(i));
-			}else if(i > index){
-				sb2.append(prev.charAt(i));
-			}
-		}
-		
-		
-		int x1 = Integer.valueOf(sb1.toString());
-		int y1 = Integer.valueOf(sb2.toString());
-		
-		sb1.setLength(0);
-		sb2.setLength(0);
-		
-		for (int i = 0; i < curr.length(); i++) {
-			if(i < index){
-				sb1.append(curr.charAt(i));
-			}else if(i > index){
-				sb2.append(curr.charAt(i));
-			}
-		}
-		
-		int x2 = Integer.valueOf(sb1.toString());
-		int y2 = Integer.valueOf(sb2.toString());
-		
-		System.out.println((x1 + x2)+"/"+(y1 + y2));
+
+		Map<String, Object> map = new HashMap<>();
+
+		String str = "1234";
+		List<String> list = Arrays.asList(new String[] { "abbcacccccc", "abcseabcccc" });
+		System.out.println(findDuplicate(list));
 	}
 
+	static String findDuplicate(List<String> ss) {
 
+		int[] idx = new int['z' - 'a' + 1];
+//		for (int i = 0; i < idx.length; i++)
+//			idx[i] = -1;
+
+		int[] localIdx = new int['z' - 'a' + 1];
+		for (String s : ss) {
+				localIdx = new int['z' - 'a' + 1];
+
+			for (int i = 0; i < s.length(); i++)
+				localIdx[s.charAt(i) - 'a']++;
+			for (int j = 0; j < localIdx.length; j++)
+				idx[j] = idx[j] == 0 ? localIdx[j] : Math.min(idx[j], localIdx[j]);
+		}
+
+		String r = "";
+		for (int i = 0; i < idx.length; i++) {
+			if(idx[i] == 0) continue;
+			for (int j = 0; j < idx[i]; j++)
+				r += String.valueOf((char) ('a' + i));
+		}
+
+		return r;
+	}
 
 }
